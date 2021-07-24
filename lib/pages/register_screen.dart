@@ -5,6 +5,7 @@ import 'login_screen.dart';
 class SignUpPage extends StatefulWidget {
   // final VoidCallback onSignedIn;
   // const SignUpPage({Key? key, required this.onSignedIn}) : super(key: key);
+  static const routeName = "/register";
 
   @override
   _SignUpPage createState() => _SignUpPage();

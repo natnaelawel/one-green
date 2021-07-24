@@ -8,6 +8,8 @@ import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
 import 'package:flutter_firestore_example/utils/user_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
+  static const routeName = "/userProfile";
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
