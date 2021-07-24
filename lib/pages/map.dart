@@ -12,6 +12,7 @@ const double CAMERA_TILT = 0;
 const double CAMERA_BEARING = 30;
 
 class MapPage extends StatefulWidget {
+  static const String routeName = "/map";
   @override
   State<StatefulWidget> createState() => MapPageState();
 }

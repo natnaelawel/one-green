@@ -2,17 +2,13 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_firestore_example/pages/home.dart';
-import 'package:flutter_firestore_example/pages/profile.dart';
-=======
-// import 'package:flutter_firestore_example/pages/home.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
-import 'package:flutter_firestore_example/pages/product_detail.dart';
-import 'package:flutter_firestore_example/pages/products.dart';
+import 'package:flutter_firestore_example/pages/map.dart';
+import 'package:flutter_firestore_example/pages/profile.dart';
 import 'package:flutter_firestore_example/pages/profile/edit_profile_page.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
->>>>>>> origin/enoch
+import 'package:flutter_firestore_example/pages/register_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,40 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
-      title: 'One Green',
-      debugShowCheckedModeBanner: false,
-
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        accentColor: Colors.lightGreenAccent,
-        backgroundColor: Colors.black54
-      ),
-      initialRoute: "/",
-      onGenerateRoute: generateRoute
-    );
-  }
-
-  Route<dynamic>? generateRoute(RouteSettings settings) {
-    switch(settings.name){
-      case "/" : {
-        return MaterialPageRoute(builder: (context) => HomePage(title: "Home Page"));
-      }
-      case ProfilePage.routeName : {
-        return MaterialPageRoute(builder: (context) => ProfilePage());
-      }
-      // case "/product-detail": {
-        // return MaterialPageRoute(builder: (context) => ProductDetailPage(title: "Product Detail Page", productId: settings.arguments as String));
-
-      // }
-=======
-        title: 'Flutter Demo',
+        title: 'One Green',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primarySwatch: Colors.green,
             accentColor: Colors.lightGreenAccent,
             backgroundColor: Colors.black54),
-        initialRoute: "/",
+        initialRoute: ProfilePage.routeName,
         onGenerateRoute: generateRoute);
   }
 
@@ -65,29 +34,33 @@ class MyApp extends StatelessWidget {
     switch (settings.name) {
       case "/":
         {
-          return MaterialPageRoute(builder: (context) => LoginPage());
+          return MaterialPageRoute(
+              builder: (context) => HomePage(title: "Home Page"));
         }
-      case "/profile":
+      case CollectorProfile.routeName:
+        {
+          return MaterialPageRoute(builder: (context) => CollectorProfile());
+        }
+      case MapPage.routeName:
+        {
+          return MaterialPageRoute(builder: (context) => MapPage());
+        }
+      case ProfilePage.routeName:
         {
           return MaterialPageRoute(builder: (context) => ProfilePage());
         }
-      case "/editProfile":
+      case EditProfilePage.routeName:
         {
           return MaterialPageRoute(builder: (context) => EditProfilePage());
         }
-      case "/products":
+      case LoginPage.routeName:
         {
-          return MaterialPageRoute(
-              builder: (context) => ProductPage(title: "Product Page"));
+          return MaterialPageRoute(builder: (context) => LoginPage());
         }
-      case "/product-detail":
+      case SignUpPage.routeName:
         {
-          return MaterialPageRoute(
-              builder: (context) => ProductDetailPage(
-                  title: "Product Detail Page",
-                  productId: settings.arguments as String));
-        }
->>>>>>> origin/enoch
+          return MaterialPageRoute(builder: (context) => SignUpPage());
+        }      
     }
     return null;
   }

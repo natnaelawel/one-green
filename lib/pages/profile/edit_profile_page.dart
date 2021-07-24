@@ -1,25 +1,22 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
 import 'package:flutter_firestore_example/utils/user_preferences.dart';
-import 'package:geocoder/geocoder.dart';
 import 'package:geocoder/model.dart';
-// import 'package:geocoder/geocoder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class EditProfilePage extends StatefulWidget {
+  static const routeName = "/editProfile";
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  late PickedFile _imageFile;
   final ImagePicker _picker = new ImagePicker();
 
   Map<String, dynamic> _formData = <String, dynamic>{
@@ -45,24 +42,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  // void _openFileExplorer() async {
-  //   FilePickerResult result = await FilePicker.platform.pickFiles();
-
-  //   if (result != null) {
-  //     File file = File(result.files.single.path);
-  //     print(file.path);
-  //   } else {}
-
-  //   if (result != null) {
-  //     PlatformFile file = result.files.first;
-
-  //     print(file.name);
-  //     print(file.bytes);
-  //     print(file.size);
-  //     print(file.extension);
-  //     print(file.path);
-  //   } else {}
-  // }
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -207,7 +186,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       source: source,
     );
     setState(() {
-      _imageFile = pickedFile!;
     });
     // print(_imageFile.path + ' profile page');
   }
