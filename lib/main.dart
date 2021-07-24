@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             accentColor: Colors.lightGreenAccent,
             backgroundColor: Colors.black54),
-        initialRoute: ProfilePage.routeName,
+        initialRoute: LoginPage.routeName,
         onGenerateRoute: generateRoute);
   }
 
