@@ -110,11 +110,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget _buildProfilePhotoField() {
-    final user = UserPreferences.myUser;
+    // final user = UserPreferences.myUser;
     return Stack(
       children: <Widget>[
         ProfileWidget(
-          imagePath: user.imagePath,
+          imagePath: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80',
           onClicked: () async {},
         ),
         Positioned(
