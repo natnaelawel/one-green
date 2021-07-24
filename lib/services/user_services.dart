@@ -6,4 +6,7 @@ class UserServices {
     fromFirestore: (snapshot, _) => User.fromJson(snapshot.data()!, snapshot.reference.id),
     toFirestore: (product, _) => product.toJson(),
   );
+
+
+  
 }

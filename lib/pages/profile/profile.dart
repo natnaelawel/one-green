@@ -5,7 +5,7 @@ import 'package:flutter_firestore_example/pages/profile/appbar_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/numbers_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
-import 'package:flutter_firestore_example/utils/user_preferences.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = "/userProfile";
@@ -17,7 +17,17 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
+    final user =  new User(
+        uid: "890707",
+        name: "Nathaniel Awel",
+        phone: "+0923343443",
+        password: "password",
+        houseNo: "314",
+        address: "Hawassa, Ethiopia",
+        latLng: new LatLng(9.001392211274675, 38.78237001138305),
+        rating: 4.5,
+        comments: "comments",
+        role: "role");
 
     return Scaffold(
       appBar: buildAppBar(context),

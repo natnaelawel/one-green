@@ -110,7 +110,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget _buildProfilePhotoField() {
-    final user = UserPreferences.myUser;
+    // final user = UserPreferences.myUser;
     return Stack(
       children: <Widget>[
         ProfileWidget(
