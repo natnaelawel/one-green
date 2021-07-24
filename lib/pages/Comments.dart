@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Comments extends StatelessWidget {
+class Comments extends StatefulWidget {
+  @override
+  _CommentsState createState() => _CommentsState();
+}
+
+class _CommentsState extends State<Comments> {
+  var _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,20 +16,20 @@ class Comments extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(15),
             child: Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
               child: _comments_cards(),
             ),
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) => setState(() => _currentIndex = index),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.map), label: "map"),
           BottomNavigationBarItem(icon: Icon(Icons.file_copy), label: "file")
         ],
-        currentIndex: 0,
+        currentIndex: _currentIndex,
         elevation: 10,
       ),
     );
@@ -68,24 +74,18 @@ Widget _comments_cards() {
                       ),
                       subtitle: Text(
                         comment.values.first,
-                        style: TextStyle(
-                            color: comment.values.last == 'read'
-                                ? Colors.black
-                                : Colors.black38),
+                        style: TextStyle(color: comment.values.last == 'read' ? Colors.black : Colors.black38),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0,0,10,0),
-                      child: Container(
-                        alignment: Alignment.bottomRight,
-                          child: Text(comment.values.elementAt(1))),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Container(alignment: Alignment.bottomRight, child: Text(comment.values.elementAt(1))),
                     ),
                     ButtonBar(
                       children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.comment),
-                           onPressed: (){},
-
+                          onPressed: () {},
                         ),
                         TextButton(
                           child: const Text('Clear'),
