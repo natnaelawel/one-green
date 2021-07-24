@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore_example/pages/feedback.dart';
 import 'package:flutter_firestore_example/pages/map.dart';
 
 class HomePage extends StatefulWidget {

@@ -36,6 +36,7 @@ dependencies:
   geocoder: ^0.2.1
   multi_select_flutter: ^4.0.0
   youtube_player_flutter: ^8.0.0
+  image_picker: ^0.8.2
 
 dev_dependencies:
   flutter_test:
