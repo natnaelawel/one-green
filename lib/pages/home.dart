@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/feedback.dart';
+import 'package:flutter_firestore_example/pages/map.dart';
+import 'package:flutter_firestore_example/pages/profile.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -13,13 +16,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: widget.key,
-      appBar: AppBar(title: Text(widget.title),),
-      body: Column(children: [
-        Center(
-        child: ElevatedButton(
-          onPressed: () {Navigator.pushNamed(context, "/products"); },
-          child: Text("Show Products"),),)
-      ],),
+      body: MapPage(),
     );
   }
 }
