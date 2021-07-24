@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_firestore_example/model/User.dart';
+import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/model/pininfo.dart';
 import 'package:flutter_firestore_example/widgets/map/map_pill.dart';
 import 'package:geolocator/geolocator.dart';
