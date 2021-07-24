@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
-import 'package:flutter_firestore_example/utils/user_preferences.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';

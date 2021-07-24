@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore_example/model/User.dart';
+import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/profile/appbar_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/numbers_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
-import 'package:flutter_firestore_example/utils/user_preferences.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = "/userProfile";
@@ -17,7 +17,19 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    // final user = UserPreferences.myUser;
+    final user = new User(
+        uid: "890707",
+        name: "Nathaniel Awel",
+        phone: "+0923343443",
+        password: "password",
+        profile: {
+          "houseNo": "314",
+          "address": "Hawassa, Ethiopia",
+          "latLng": new LatLng(9.001392211274675, 38.78237001138305),
+          "rating": 4.5,
+        },
+        comments: "comments",
+        role: "role");
 
     return Scaffold(
       appBar: buildAppBar(context),
@@ -54,10 +66,10 @@ class _ProfilePageState extends State<ProfilePage> {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
-          // Text(
-          //   user.email,
-          //   style: TextStyle(color: Colors.grey),
-          // )
+          Text(
+            "user",
+            style: TextStyle(color: Colors.grey),
+          )
         ],
       );
 
@@ -76,10 +88,10 @@ class _ProfilePageState extends State<ProfilePage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            // Text(
-            //   user.about,
-            //   style: TextStyle(fontSize: 16, height: 1.4),
-            // ),
+            Text(
+              "user",
+              style: TextStyle(fontSize: 16, height: 1.4),
+            ),
           ],
         ),
       );
