@@ -45,24 +45,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
-  // void _openFileExplorer() async {
-  //   FilePickerResult result = await FilePicker.platform.pickFiles();
 
-  //   if (result != null) {
-  //     File file = File(result.files.single.path);
-  //     print(file.path);
-  //   } else {}
-
-  //   if (result != null) {
-  //     PlatformFile file = result.files.first;
-
-  //     print(file.name);
-  //     print(file.bytes);
-  //     print(file.size);
-  //     print(file.extension);
-  //     print(file.path);
-  //   } else {}
-  // }
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
