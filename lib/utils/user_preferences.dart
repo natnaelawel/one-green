@@ -1,6 +1,6 @@
 
 
-import 'package:flutter_firestore_example/model/user.dart';
+// import 'package:flutter_firestore_example/model/user.dart';
 
 // class UserPreferences {
 //   static const myUser = User(

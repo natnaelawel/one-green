@@ -66,10 +66,12 @@ class MapPageState extends State<MapPage> {
         name: "Nathaniel Awel",
         phone: "+0923343443",
         password: "password",
-        houseNo: "314",
-        address: "Hawassa, Ethiopia",
-        latLng: new LatLng(9.001392211274675, 38.78237001138305),
-        rating: 4.5,
+        profile: {
+          "houseNo": "314",
+          "address": "Hawassa, Ethiopia",
+          "latLng": new LatLng(9.001392211274675, 38.78237001138305),
+          "rating": 4.5,
+        },
         comments: "comments",
         role: "role"),
     new User(
@@ -77,10 +79,12 @@ class MapPageState extends State<MapPage> {
         name: "Henok Adane",
         phone: "+2593343434",
         password: "password",
-        houseNo: "235",
-        address: "Hosana, Ethiopia",
-        latLng: new LatLng(9.202392211274675, 38.78237001138305),
-        rating: 3.5,
+        profile: {
+          "houseNo": "235",
+          "address": "Hosana, Ethiopia",
+          "latLng": new LatLng(9.202392211274675, 38.78237001138305),
+          "rating": 3.5,
+        },
         comments: "comments",
         role: "role"),
     new User(
@@ -88,10 +92,12 @@ class MapPageState extends State<MapPage> {
         name: "Minase Alemu",
         phone: "+25923343434",
         password: "password",
-        houseNo: "225",
-        address: "Addis Ababa, Ethiopia",
-        latLng: new LatLng(9.102392211274675, 38.78237001138305),
-        rating: 3.5,
+        profile: {
+          "houseNo": "225",
+          "address": "Addis Ababa, Ethiopia",
+          "latLng": new LatLng(9.102392211274675, 38.78237001138305),
+          "rating": 3.5,
+        },
         comments: "comments",
         role: "role")
   ];
@@ -109,13 +115,13 @@ class MapPageState extends State<MapPage> {
         userId: user.uid,
         name: user.name,
         phone: user.phone,
-        rating: user.rating,
-        houseNo: user.houseNo,
-        location: user.latLng,
+        rating: user.profile['rating'],
+        houseNo: user.profile['houseNo'],
+        location: user.profile['latLng'],
       );
       _markers.add(Marker(
           markerId: MarkerId(user.uid),
-          position: user.latLng,
+          position: user.profile['latLng'],
           onTap: () {
             handleCurrentlySelectedPin(pin);
           },
