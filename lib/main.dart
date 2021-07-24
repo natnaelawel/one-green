@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/Tips.dart';
 import 'package:flutter_firestore_example/pages/home.dart';
 import 'package:flutter_firestore_example/pages/product_detail.dart';
 import 'package:flutter_firestore_example/pages/products.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   Route<dynamic>? generateRoute(RouteSettings settings) {
     switch(settings.name){
       case "/" : {
-        return MaterialPageRoute(builder: (context) => HomePage(title: "Home Page"));
+        return MaterialPageRoute(builder: (context) => RecycleTips());
       }
       case "/products" : {
         return MaterialPageRoute(builder: (context) => ProductPage(title: "Product Page"));
