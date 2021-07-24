@@ -114,7 +114,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Stack(
       children: <Widget>[
         ProfileWidget(
-          imagePath: user.imagePath,
+          imagePath: "assets/images/avatar.jpeg",
           onClicked: () async {},
         ),
         Positioned(

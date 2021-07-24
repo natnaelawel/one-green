@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
         physics: BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: "assets/images/avatar.jpeg",
             onClicked: () async {},
           ),
           const SizedBox(height: 24),
@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 4),
           Text(
-            user.email,
+            "user",
             style: TextStyle(color: Colors.grey),
           )
         ],
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 16),
             Text(
-              user.about,
+              "user",
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
