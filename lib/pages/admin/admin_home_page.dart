@@ -1,17 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/services/user_services.dart';
 
-class HomePage extends StatefulWidget {
+class AdminHomePage extends StatefulWidget {
   final String title;
-  const HomePage({Key? key, required this.title}) : super(key: key);
+  const AdminHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _AdminHomePageState createState() => _AdminHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AdminHomePageState extends State<AdminHomePage> {
   late final UserServices userServices;
   @override
   void initState() {
@@ -19,26 +17,16 @@ class _HomePageState extends State<HomePage> {
     userServices = new UserServices();
   }
 
-  Future<List<Map<String, Object?>>> fetchUsers() async {
-    final data = await userServices.getNormalUsers();
-    return data;
-  }
+  // Future<List<Map<String, Object?>>> fetchUsers() async {
+  //   final data = await userServices.getNormalUsers();
+  //   return data;
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: widget.key,
-      body: FutureBuilder(
-          future: fetchUsers(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final users = snapshot.data as List<Map<String, dynamic>>;
-              print(users[0]['password']);
-              print("password");
-              return Center(child: Text(users[0]['password']));
-            }
-            return Center(child: CircularProgressIndicator());
-          }),
+      body: Center(child: Text("Dashboard"),),
     );
   }
 }

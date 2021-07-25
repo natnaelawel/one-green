@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/model/user.dart';
-import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
           "latLng": new LatLng(9.001392211274675, 38.78237001138305),
           "rating": 4.5,
         },
-        comments: "comments",
+        comments: [],
         role: "role");
 
     return Scaffold(

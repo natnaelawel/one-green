@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:flutter_firestore_example/widgets/dialog.dart';
 import 'package:provider/provider.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -17,8 +18,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   bool _showPassword = false;
-  String _phone = "";
-  String _password = "";
+  String _phone = "0912345678";
+  String _password = "12345678";
   // bool _isLoading;
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -290,20 +291,22 @@ class _LoginPage extends State<LoginPage> {
     if (form!.validate()) {
       print("validated $_phone $_password");
       form.save();
-
       try {
-        if (true) {
-          final isMatch = await Provider.of<UserRepository>(context, listen: false)
-              .signIn(_phone, _password);
-          if (isMatch) {
-             Future.delayed(Duration(seconds: 2)).then((value) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, "/", (Route<dynamic> route) => false);
-          });
-          }
+        var matched = await Provider.of<UserRepository>(context, listen: false)
+            .signIn(_phone, _password);
+        print("matching");
+        print(matched);
+        final isMatched =
+            Provider.of<UserRepository>(context, listen: false).status ==
+                Status.Authenticated;
+        print(isMatched);
+        if (isMatched) {
+          Navigator.pushNamed(context, LoginPage.routeName);
         }
       } catch (err) {
         print('error');
+        DialogBox().information(
+            context, 'Login Error', 'Something went wrong please try again!:');
         print(err);
       }
     }

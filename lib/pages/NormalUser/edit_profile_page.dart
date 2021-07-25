@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firestore_example/model/user.dart';
-import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
