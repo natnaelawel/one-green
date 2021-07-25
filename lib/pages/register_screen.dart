@@ -25,6 +25,20 @@ class _SignUpPage extends State<SignUpPage> {
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
 
+  int selectedRadio = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedRadio = -1;
+  }
+
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -61,6 +75,10 @@ class _SignUpPage extends State<SignUpPage> {
                         _buildPasswordTextField(),
                         SizedBox(
                           height: 20,
+                        ),
+                        _buildChooseUserTypeField(),
+                        SizedBox(
+                          height: 20.0,
                         ),
                         _submitButton(),
                         _createAccountLabel(),
@@ -120,8 +138,8 @@ class _SignUpPage extends State<SignUpPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil("/login", (route) => false);
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 10),
@@ -217,6 +235,36 @@ class _SignUpPage extends State<SignUpPage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildChooseUserTypeField() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+            child: ListTile(
+          title: Text("User"),
+          leading: Radio(
+            value: 0,
+            groupValue: selectedRadio,
+            onChanged: (val) {
+              setSelectedRadio(val as int);
+            },
+          ),
+        )),
+        Expanded(
+            child: ListTile(
+          title: Text("Collector"),
+          leading: Radio(
+            value: 1,
+            groupValue: selectedRadio,
+            onChanged: (val) {
+              setSelectedRadio(val as int);
+            },
+          ),
+        )),
+      ],
     );
   }
 
