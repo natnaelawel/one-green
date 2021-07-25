@@ -126,13 +126,41 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   children: [
                     Icon(Icons.home),
-                    SizedBox(width: 10.0,),
+                    SizedBox(
+                      width: 10.0,
+                    ),
                     Text(
                       user.profile['houseNo'],
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
                     )
+                  ],
+                ),
+                SizedBox(
+                  height: 24,
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(Icons.lock_clock),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          "Availability",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        
+                      ],
+                    ),
                   ],
                 ),
               ],
