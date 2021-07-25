@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/index.dart';
 import 'package:flutter_firestore_example/pages/admin/index.dart';
 import 'package:flutter_firestore_example/pages/collectors/index.dart';
@@ -14,16 +15,14 @@ import 'utils/auth_provider.dart';
 
 class PageRouter {
   static Route? generateRoute(RouteSettings settings) {
+    late User? user;
     switch (settings.name) {
       case "/":
         {
-
           return MaterialPageRoute(builder: (context) {
-            Provider.of<UserRepository>(context).getUserFromStorage();
-            final user = Provider.of<UserRepository>(context).authenticatedUser;
+            // final user = Provider.of<UserRepository>(context).authenticatedUser;
             final userStatus = Provider.of<UserRepository>(context).status;
 
-            print("user data $user $userStatus");
             switch (userStatus) {
               case Status.Unauthenticated:
                 {
@@ -31,8 +30,7 @@ class PageRouter {
                 }
               case Status.Authenticated:
                 {
-                  print(user!.name);
-                  switch (user.role) {
+                  switch ("NORMAL_USER") {
                     case "NORMAL_USER":
                       {
                         return NormalUserIndexPage();
@@ -56,7 +54,6 @@ class PageRouter {
                   child: CircularProgressIndicator(),
                 );
             }
-            return LoginPage();
           });
         }
       case MapPage.routeName:
@@ -119,20 +116,20 @@ class PageRouter {
       case LoginPage.routeName:
         {
           return MaterialPageRoute(builder: (context) {
-            final userStatus = Provider.of<UserRepository>(context).status;
-            switch (userStatus) {
-              case Status.Unauthenticated:
-                {
+            // final userStatus = Provider.of<UserRepository>(context).status;
+            // switch (userStatus) {
+              // case Status.Unauthenticated:
+                // {
                   return LoginPage();
-                }
+                // }
 
-              case Status.Authenticated:
+              // case Status.Authenticated:
               // return HomePage(title: "HomePage");
-              case Status.Authenticating:
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-            }
+              // case Status.Authenticating:
+                // return Center(
+                  // child: CircularProgressIndicator(),
+                // );
+            // }
           });
         }
       case SignUpPage.routeName:
