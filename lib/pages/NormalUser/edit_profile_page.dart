@@ -33,15 +33,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final Map<String, dynamic> _user = {};
 
-  List<String> _places = [
-    "Bole",
-    "Addis Ketema",
-    "Gulele",
-    "Arada",
-    "Bole Lemi",
+  List<Address> _places = [
+    Address(index: 1, name: "Bole"),
+    Address(index: 2, name: "Addis Ketema"),
+    Address(index: 3, name: "Gulele"),
+    Address(index: 4, name: "Arada"),
+    Address(index: 5, name: "Bole Lemi"),
   ];
 
-  int selectedRadio = -1;
+  int selectedRadio = 1;
+
+  setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
+  }
+
+  String address = '';
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -299,13 +307,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
       selectedTextStyle: TextStyle(color: Colors.white),
       onTap: (values) {
         //_selectedAnimals4 = values;
+        setState(() {
+          this._user['availableDays'] = [values];
+        });
       },
     );
   }
 
   Widget _buildAddressField(BuildContext context) {
     return ListTile(
-      title: Text('Select your Address'),
+      title: Text('Select Address'),
       onTap: () {
         _showSingleChoiceDialog(context);
       },
@@ -318,27 +329,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
           // final _singleNotifier = Provider.of<SingleNotifier>(context);
           return AlertDialog(
             title: Text('Select Address'),
-            content: SingleChildScrollView(
-              child: Container(
-                width: double.infinity,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: _places
-                      .map(
-                        (e) => RadioListTile(
-                          title: Text(e),
-                          value: e,
-                          groupValue: selectedRadio,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedRadio = value as int;
-                            });
-                          },
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _places
+                  .map(
+                    (place) => RadioListTile(
+                      title: Text("${place.name}"),
+                      value: place.index,
+                      groupValue: selectedRadio,
+                      onChanged: (val) {
+                        address = place.name;
+                        setSelectedRadio(val as int);
+                      },
+                    ),
+                  )
+                  .toList(),
             ),
             actions: <Widget>[
               TextButton(
@@ -350,7 +355,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   )),
               TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
+                onPressed: () {
+                  setState(() {
+                    this._user['address'] = address;
+                  });
+                  Navigator.pop(context, 'OK');
+                },
                 child: const Text(
                   'OK',
                   style: TextStyle(
@@ -368,9 +378,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
       title: Text('Choose Location'),
       trailing: IconButton(
         color: Colors.blue,
-        iconSize: 30,
-        icon: Icon(locationSelected ? Icons.mark_chat_read : Icons.map_rounded),
-        onPressed: () {},
+        // iconSize: 30,
+        icon: Icon(locationSelected ? Icons.check : Icons.pin_drop),
+        onPressed: () => getLocation(),
       ),
       onTap: () => getLocation(),
     );
@@ -382,12 +392,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
-    print(position);
-    setState(() {});
     final coordinates = new Coordinates(position.latitude, position.longitude);
 
     latitude = coordinates.latitude;
     longitude = coordinates.longitude;
+
+    setState(() {
+      this._user['latitude'] = latitude;
+      this._user['longitude'] = longitude;
+    });
 
     _showToast();
   }
@@ -396,6 +409,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     ScaffoldMessenger.maybeOf(context)!.showSnackBar(
       SnackBar(
         content: const Text('Location Selected!'),
+        duration: Duration(seconds: 1),
       ),
     );
   }
@@ -418,7 +432,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
       password: this._user['password'],
       comments: this._user['comments'],
       role: this._user['role'],
-      profile: this._user['profile'],
+      profile: {
+        'houseNumber': this._user['houseNumber'],
+        'address': this._user['address'],
+        'latitude': this._user['latitude'],
+        'longitude': this._user['longitude']
+      },
     );
   }
+}
+
+class Address {
+  final int index;
+  final String name;
+
+  Address({required this.index, required this.name});
 }
