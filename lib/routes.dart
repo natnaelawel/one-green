@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/index.dart';
-import 'package:flutter_firestore_example/pages/NormalUser/normal_user_home_page.dart';
-import 'package:flutter_firestore_example/pages/admin/admin_home_page.dart';
 import 'package:flutter_firestore_example/pages/admin/index.dart';
-import 'package:flutter_firestore_example/pages/collectors/collector_home_page.dart';
 import 'package:flutter_firestore_example/pages/collectors/index.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
@@ -20,16 +17,18 @@ class PageRouter {
     switch (settings.name) {
       case "/":
         {
+
           return MaterialPageRoute(builder: (context) {
+            Provider.of<UserRepository>(context).getUserFromStorage();
             final user = Provider.of<UserRepository>(context).authenticatedUser;
             final userStatus = Provider.of<UserRepository>(context).status;
+
+            print("user data $user $userStatus");
             switch (userStatus) {
               case Status.Unauthenticated:
                 {
                   return LoginPage();
                 }
-              case Status.Unauthenticated:
-                break;
               case Status.Authenticated:
                 {
                   print(user!.name);
