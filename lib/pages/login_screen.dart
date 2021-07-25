@@ -307,7 +307,7 @@ class _LoginPage extends State<LoginPage> {
       } catch (err) {
         print('error');
         DialogBox().information(
-        context, 'Login Error', 'Something went wrong please try again!');
+        context, 'Login Error', 'Something went wrong please try again!:');
         print(err);
       }
     }
