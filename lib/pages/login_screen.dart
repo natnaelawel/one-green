@@ -18,8 +18,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   bool _showPassword = false;
-  String _phone = "";
-  String _password = "";
+  String _phone = "0912345678";
+  String _password = "12345678";
   // bool _isLoading;
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -292,19 +292,21 @@ class _LoginPage extends State<LoginPage> {
       print("validated $_phone $_password");
       form.save();
       try {
-      await Provider.of<UserRepository>(context, listen: false).signIn(_phone, _password);
-      final isMatched = Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated;
-      if(isMatched){
-        Navigator.pushNamed(context, LoginPage.routeName);
-        Navigator.pushNamedAndRemoveUntil(
-                context, "/", (Route<dynamic> route) => false);
-          
-      }
-
+        var matched = await Provider.of<UserRepository>(context, listen: false)
+            .signIn(_phone, _password);
+        print("matching");
+        print(matched);
+        final isMatched =
+            Provider.of<UserRepository>(context, listen: false).status ==
+                Status.Authenticated;
+        print(isMatched);
+        if (isMatched) {
+          Navigator.pushNamed(context, LoginPage.routeName);
+        }
       } catch (err) {
         print('error');
         DialogBox().information(
-        context, 'Login Error', 'Something went wrong please try again!:');
+            context, 'Login Error', 'Something went wrong please try again!:');
         print(err);
       }
     }

@@ -19,7 +19,7 @@ class User {
       
       });
 
-   User.fromJson(Map<String, dynamic?> json, String reference)
+   User.fromJson(Map<String, dynamic> json, String reference)
       : this(
           uid: reference,
           name: json['name']! as String,

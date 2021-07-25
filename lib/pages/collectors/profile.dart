@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class CollectorProfile extends StatefulWidget {
+class CollectorProfilePage extends StatefulWidget {
   static const routeName = "/collectorProfile";
 
-  const CollectorProfile({Key? key}) : super(key: key);
+  const CollectorProfilePage({Key? key}) : super(key: key);
 
   @override
-  _CollectorProfileState createState() => _CollectorProfileState();
+  _CollectorProfilePageState createState() => _CollectorProfilePageState();
 }
 
-class _CollectorProfileState extends State<CollectorProfile> {
+class _CollectorProfilePageState extends State<CollectorProfilePage> {
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
   Map<String, dynamic> _collector = {
