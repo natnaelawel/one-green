@@ -16,11 +16,23 @@ import 'pages/Navigator.dart';
 import 'package:flutter_firestore_example/pages/profile/edit_profile_page.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
 import 'package:flutter_firestore_example/pages/register_screen.dart';
+import 'package:flutter_firestore_example/routes.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:flutter_firestore_example/utils/my_theme.dart';
+import 'package:flutter_firestore_example/utils/theme.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => UserRepository(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => MyTheme(),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,10 +41,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'One Green',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primarySwatch: Colors.green,
-            accentColor: Colors.lightGreenAccent,
-            backgroundColor: Colors.black54),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: Provider.of<MyTheme>(context).currentTheme(),
         initialRoute: "/",
         onGenerateRoute: generateRoute);
   }
