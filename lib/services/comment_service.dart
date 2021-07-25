@@ -3,16 +3,25 @@ import 'package:flutter_firestore_example/model/Comment.dart';
 
 class CommentServices {
   static final CollectionReference commentservice =
-      FirebaseFirestore.instance.collection('comments').withConverter<Comment>(
-            fromFirestore: (snapshot, _) =>
-                Comment.fromJson(snapshot.data()!, snapshot.reference.id),
-            toFirestore: (comment, _) => comment.toJson(),
-          );
-  Future<dynamic> getComments(String userId) async {
-    var data = await commentservice
+      FirebaseFirestore.instance.collection('comments');
+
+  Future<List<Comment>> getComments(String userId) async {
+    final data = await commentservice
         .where("userId", isEqualTo: userId)
         .get()
-        .then((value) => value.docs);
+        .then((value) => value.docs
+            .map((e) => new Comment(
+                uid: e.id,
+                body: e['body'] as String,
+                userId: e['userId'] as String,
+                commentBy: e['commentedBy'] as String,
+                createdAt: DateTime.now()))
+            .toList());
+    print("data is s ${data.length}");
+    // .map((e) => e.data())
+    // .toList()
+    // .map((e) => e as Map<String, dynamic>)
+    // .toList());
     return data;
   }
 

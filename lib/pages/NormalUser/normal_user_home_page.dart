@@ -79,7 +79,7 @@ class _NormalUserHomePageState extends State<NormalUserHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _styledCards(context, "Recycled", "10 KG", Colors.red),
-                _styledCards(context, "Earning", "342.37", Colors.green)
+                _styledCards(context, "Earning", "\$342.37", Colors.green)
               ],
             ),
           ],
@@ -93,27 +93,35 @@ Widget _styledCards(
     BuildContext context, String name, String value, Color color) {
   return Center(
     child: Padding(
-      padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
+      padding: const EdgeInsets.fromLTRB(5, 30, 5, 0),
       child: Container(
-        height: 120,
-        width: 120,
+        height: 150,
+        width: 150,
         child: Card(
+          elevation: 10.0,
           color: color,
           child: Center(
             widthFactor: 10.0,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(3, 0, 0, 0),
-              child: ListTile(
-                title: Text(
-                  value,
-                  style: GoogleFonts.acme(
-                      fontSize: 35, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  name,
-                  style: GoogleFonts.b612(
-                      fontSize: 19, fontWeight: FontWeight.bold),
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    value,
+                    style: GoogleFonts.acme(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      textStyle: TextStyle(),
+                    ),
+                  ),
+                  Text(
+                    name,
+                    style: GoogleFonts.b612(
+                        fontSize: 19, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
           ),
@@ -122,7 +130,6 @@ Widget _styledCards(
     ),
   );
 }
-
 
 // FutureBuilder(
 //           future: fetchUsers(),
