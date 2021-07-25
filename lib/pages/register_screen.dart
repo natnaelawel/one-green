@@ -17,6 +17,7 @@ class _SignUpPage extends State<SignUpPage> {
   String _password = "";
   String _confirmPassword = "";
   bool _isLoading = false;
+  final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
 
@@ -49,7 +50,7 @@ class _SignUpPage extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        _buildEmailTextField(),
+                        _buildPhoneNumberField(),
                         SizedBox(
                           height: 20,
                         ),
@@ -145,7 +146,7 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Widget _buildEmailTextField() {
+  Widget _buildPhoneNumberField() {
     return TextFormField(
       onChanged: (value) => _phone = value,
       keyboardType: TextInputType.emailAddress,
@@ -164,7 +165,7 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget _buildNameTextField() {
     return TextFormField(
-      controller: _passwordController,
+      controller: _nameController,
       validator: (value) => value!.length <= 4
           ? "Company Name must be at least 4 character"
           : null,

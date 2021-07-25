@@ -19,17 +19,17 @@ class User {
       
       });
 
-  // User.fromJson(Map<String, Object?> json, String reference)
-  //     : this(
-  //         uid: reference,
-  //         name: json['name']! as String,
-  //         phone: json['phone']! as String,
-  //         password: json['password']! as String,
-  //         comments: json['comments']!,
-  //         role: json['role']! as String,
-  //         profile: json['profile'] as Map<String, dynamic>
+  User.fromJson(Map<String, Object?> json, String reference)
+      : this(
+          uid: reference,
+          name: json['name']! as String,
+          phone: json['phone']! as String,
+          password: json['password']! as String,
+          comments: json['comments']!,
+          role: json['role']! as String,
+          profile: json['profile'] as Map<String, dynamic>
 
-  //       );
+        );
 
   Map<String, Object?> toJson() {
     return {

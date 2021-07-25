@@ -5,6 +5,7 @@ import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
@@ -40,6 +41,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+
+  String _verticalGroupValue = "Bole";
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -113,7 +116,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Stack(
       children: <Widget>[
         ProfileWidget(
-          imagePath: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80',
+          imagePath:
+              'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80',
           onClicked: () async {},
         ),
         Positioned(
@@ -184,8 +188,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final pickedFile = await _picker.getImage(
       source: source,
     );
-    setState(() {
-    });
+    setState(() {});
     // print(_imageFile.path + ' profile page');
   }
 
@@ -332,34 +335,49 @@ class _EditProfilePageState extends State<EditProfilePage> {
       "Arada",
       "Bole Lemi",
     ];
-    final _items =
-        _places.map((place) => MultiSelectItem<String>(place, place)).toList();
-    return MultiSelectDialogField(
-      items: _items,
-      chipDisplay: MultiSelectChipDisplay(),
-      height: MediaQuery.of(context).size.height * 0.5,
-      searchable: true,
-      title: Text("Address"),
-      selectedColor: Colors.blue,
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.01),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        border: Border.all(
-          // color: Colors.blue,
-          width: 1,
+    // final _items =
+    //     _places.map((place) => MultiSelectItem<String>(place, place)).toList();
+    // return MultiSelectDialogField(
+    //   items: _items,
+    //   chipDisplay: MultiSelectChipDisplay(),
+    //   height: MediaQuery.of(context).size.height * 0.5,
+    //   searchable: true,
+    //   title: Text("Address"),
+    //   selectedColor: Colors.blue,
+    //   decoration: BoxDecoration(
+    //     color: Colors.blue.withOpacity(0.01),
+    //     borderRadius: BorderRadius.all(Radius.circular(10)),
+    //     border: Border.all(
+    //       // color: Colors.blue,
+    //       width: 1,
+    //     ),
+    //   ),
+    //   // buttonIcon: Icon(
+    //   //   Icons.place,
+    //   //   color: Colors.blue,
+    //   // ),
+    //   buttonText: Text(
+    //     "Address",
+    //     style: TextStyle(height: 2.0),
+    //   ),
+    //   onConfirm: (results) {
+    //     //_selectedAnimals = results;
+    //   },
+    // );
+    return Column(
+      children: [
+        RadioGroup<String>.builder(
+          groupValue: _verticalGroupValue,
+          onChanged: (value) => setState(() {
+            _verticalGroupValue = value!;
+          }),
+          items: _places,
+          itemBuilder: (item) => RadioButtonBuilder(
+            item,
+          ),
+          activeColor: Colors.red,
         ),
-      ),
-      // buttonIcon: Icon(
-      //   Icons.place,
-      //   color: Colors.blue,
-      // ),
-      buttonText: Text(
-        "Address",
-        style: TextStyle(height: 2.0),
-      ),
-      onConfirm: (results) {
-        //_selectedAnimals = results;
-      },
+      ],
     );
   }
 

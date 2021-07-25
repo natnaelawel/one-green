@@ -70,7 +70,7 @@ class _LoginPage extends State<LoginPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          _buildEmailTextField(),
+                          _buildPhoneNumberField(),
                           SizedBox(
                             height: 20,
                           ),
@@ -191,7 +191,7 @@ class _LoginPage extends State<LoginPage> {
     );
   }
 
-  Widget _buildEmailTextField() {
+  Widget _buildPhoneNumberField() {
     return TextFormField(
       onChanged: (value) => _phone = value.trim(),
       keyboardType: TextInputType.phone,
