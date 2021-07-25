@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/model/user.dart';
+import 'package:flutter_firestore_example/services/user_services.dart';
+import 'package:flutter_firestore_example/widgets/dialog.dart';
 
 import 'login_screen.dart';
 
@@ -12,12 +15,15 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPage extends State<SignUpPage> {
+  UserServices _userServices = new UserServices();
   bool _showPassword = false;
+  String _name="";
   String _phone = "";
   String _password = "";
   String _confirmPassword = "";
   bool _isLoading = false;
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
 
   @override
@@ -164,11 +170,11 @@ class _SignUpPage extends State<SignUpPage> {
 
   Widget _buildNameTextField() {
     return TextFormField(
-      controller: _passwordController,
+      controller: _nameController,
       validator: (value) => value!.length <= 4
           ? "Company Name must be at least 4 character"
           : null,
-      onSaved: (value) => _confirmPassword = value!,
+      onSaved: (value) => _name = value!,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         labelText: 'Name',
@@ -248,24 +254,27 @@ class _SignUpPage extends State<SignUpPage> {
   void handleSubmit() async {
     final form = _formKey.currentState;
     if (form!.validate()) {
-      print('validated');
+      print(_phone+_password);
       form.save();
 
+      var user = User(uid: 'uid', name: _name, phone: _phone, password: _password, comments: [], role: "",profile:{} );
+
       try {
+        await _userServices.addUser(user.toJson());
         setState(() {
           _isLoading = true;
         });
         // final user = await widget.auth.SignIn(_phone, _password);
+        DialogBox().information(
+            context, 'SignUp Success', 'You have Successfully Registered!');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        if (user != null) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
 
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (context) => HomePage()));
-        // if (user != null) {
-        //   setState(() {
-        //     _isLoading = false;
-        //   });
-        // }
-        // DialogBox().information(
-        //     context, 'SignUp Success', 'You have Successfuly Logged in');
       } catch (err) {
         print('error');
         print(err);

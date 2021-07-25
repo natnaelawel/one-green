@@ -72,7 +72,7 @@ class MapPageState extends State<MapPage> {
           "latLng": new LatLng(9.001392211274675, 38.78237001138305),
           "rating": 4.5,
         },
-        comments: "comments",
+        comments: [],
         role: "role"),
     new User(
         uid: "345676",
@@ -85,7 +85,7 @@ class MapPageState extends State<MapPage> {
           "latLng": new LatLng(9.202392211274675, 38.78237001138305),
           "rating": 3.5,
         },
-        comments: "comments",
+        comments: [],
         role: "role"),
     new User(
         uid: "785745",
@@ -98,7 +98,7 @@ class MapPageState extends State<MapPage> {
           "latLng": new LatLng(9.102392211274675, 38.78237001138305),
           "rating": 3.5,
         },
-        comments: "comments",
+        comments: [],
         role: "role")
   ];
 

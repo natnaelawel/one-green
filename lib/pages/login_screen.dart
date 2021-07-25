@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
+<<<<<<< HEAD
+=======
+import 'package:flutter_firestore_example/widgets/dialog.dart';
+>>>>>>> origin/Minasie
 import 'package:provider/provider.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -290,20 +294,20 @@ class _LoginPage extends State<LoginPage> {
     if (form!.validate()) {
       print("validated $_phone $_password");
       form.save();
-
       try {
-        if (true) {
-          final isMatch = await Provider.of<UserRepository>(context, listen: false)
-              .signIn(_phone, _password);
-          if (isMatch) {
-             Future.delayed(Duration(seconds: 2)).then((value) {
-            Navigator.pushNamedAndRemoveUntil(
+      await Provider.of<UserRepository>(context, listen: false).signIn(_phone, _password);
+      final isMatched = Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated;
+      if(isMatched){
+        Navigator.pushNamed(context, LoginPage.routeName);
+        Navigator.pushNamedAndRemoveUntil(
                 context, "/", (Route<dynamic> route) => false);
-          });
-          }
-        }
+          
+      }
+
       } catch (err) {
         print('error');
+        DialogBox().information(
+        context, 'Login Error', 'Something went wrong please try again!:');
         print(err);
       }
     }

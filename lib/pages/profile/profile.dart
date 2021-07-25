@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
           "latLng": new LatLng(9.001392211274675, 38.78237001138305),
           "rating": 4.5,
         },
-        comments: "comments",
+        comments: [],
         role: "role");
 
     return Scaffold(
