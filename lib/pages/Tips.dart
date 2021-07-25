@@ -44,6 +44,7 @@ class _RecycleTipsState extends State<RecycleTips> {
                     images[index],
                     fit: BoxFit.fitWidth,
                     height: 800,
+                    filterQuality: FilterQuality.low,
                   ),
                 ),
               ),

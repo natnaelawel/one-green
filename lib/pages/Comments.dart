@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/Hacks..dart';
+import 'package:flutter_firestore_example/pages/Tips.dart';
+import 'package:flutter_firestore_example/pages/map.dart';
+import 'package:flutter_firestore_example/pages/profile/profile.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
+
+// FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+
 
 class Comments extends StatefulWidget {
   @override
   _CommentsState createState() => _CommentsState();
 }
+final List<Widget> _children = [
+  Comments(),
+  Hacks(),
+  RecycleTips(),
+  MapPage(),
+  ProfilePage()
+];
 
 class _CommentsState extends State<Comments> {
   var _currentIndex = 0;
@@ -12,6 +28,7 @@ class _CommentsState extends State<Comments> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: EdgeInsets.all(15),
@@ -22,16 +39,7 @@ class _CommentsState extends State<Comments> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.menu), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: "map"),
-          BottomNavigationBarItem(icon: Icon(Icons.file_copy), label: "file")
-        ],
-        currentIndex: _currentIndex,
-        elevation: 10,
-      ),
+
     );
   }
 }
@@ -59,6 +67,7 @@ const comments_list = [
 
 Widget _comments_cards() {
   return (Card(
+    elevation: 0,
     child: Center(
       child: Column(
           mainAxisSize: MainAxisSize.min,

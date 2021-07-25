@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/Comments.dart';
 import 'package:flutter_firestore_example/pages/home.dart';
 import 'package:flutter_firestore_example/pages/profile.dart';
 // import 'package:flutter_firestore_example/pages/home.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_firestore_example/pages/profile/profile.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
 import 'package:flutter_firestore_example/pages/map.dart';
 import 'package:flutter_firestore_example/pages/profile.dart';
+import 'pages/Navigator.dart';
 import 'package:flutter_firestore_example/pages/profile/edit_profile_page.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
 import 'package:flutter_firestore_example/pages/register_screen.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.green,
             accentColor: Colors.lightGreenAccent,
             backgroundColor: Colors.black54),
-        initialRoute: LoginPage.routeName,
+        initialRoute: "/",
         onGenerateRoute: generateRoute);
   }
 
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
       case "/":
         {
           return MaterialPageRoute(
-              builder: (context) => HomePage(title: "Home Page"));
+              builder: (context) => UserNavigator());
         }
       case CollectorProfile.routeName:
         {
