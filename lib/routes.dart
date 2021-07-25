@@ -23,7 +23,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
+              case Status.Unauthenticated:
                 break;
               case Status.Authenticated:
                 return HomePage(title: "HomePage");
@@ -44,8 +44,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
-                break;
+
               case Status.Authenticated:
                 return CollectorProfile();
               case Status.Authenticating:
@@ -65,8 +64,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
-                break;
+
               case Status.Authenticated:
                 return MapPage();
               case Status.Authenticating:
@@ -86,8 +84,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
-                break;
+
               case Status.Authenticated:
                 return ProfilePage();
               case Status.Authenticating:
@@ -107,8 +104,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
-                break;
+
               case Status.Authenticated:
                 return EditProfilePage();
               case Status.Authenticating:
@@ -128,8 +124,7 @@ class PageRouter {
                 {
                   return LoginPage();
                 }
-              case Status.Uninitialized:
-                break;
+
               case Status.Authenticated:
                 return HomePage(title: "HomePage");
               case Status.Authenticating:

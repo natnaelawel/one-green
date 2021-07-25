@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:flutter_firestore_example/widgets/dialog.dart';
+import 'package:provider/provider.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'register_screen.dart';
@@ -289,32 +292,22 @@ class _LoginPage extends State<LoginPage> {
     if (form!.validate()) {
       print("validated $_phone $_password");
       form.save();
+      var singedIn = await Provider.of<UserRepository>(context, listen: false).signIn(_phone, _password);
+      if(await Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated){
+        Navigator.pushNamed(context, LoginPage.routeName);
+      }
 
       try {
         // setState(() {
         //   _isLoading = true;
         // });
         if (true) {
-          // DialogBox().information(
-          // context, 'Login Success', 'You have Successfuly Logged in');
-          // Navigator.replace(
-          //  MaterialPageRoute(builder: (context) => MainScreen()));
 
-          Future.delayed(Duration(seconds: 2)).then((value) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, "/profile", (Route<dynamic> route) => false);
-
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => IndexPage()),
-            //     (route) => false);
-            setState(() {
-              // _isLoading = false;
-            });
-          });
         }
       } catch (err) {
         print('error');
+        DialogBox().information(
+        context, 'Login Error', 'Something went wrong please try again!');
         print(err);
       }
     }
