@@ -1,9 +1,12 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/index.dart';
 import 'package:flutter_firestore_example/pages/admin/index.dart';
 import 'package:flutter_firestore_example/pages/collectors/index.dart';
+import 'package:flutter_firestore_example/pages/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
 import 'package:flutter_firestore_example/pages/collectors/map.dart';
@@ -15,6 +18,7 @@ import 'utils/auth_provider.dart';
 
 class PageRouter {
   static Route? generateRoute(RouteSettings settings) {
+    
     late User? user;
     switch (settings.name) {
       case "/":

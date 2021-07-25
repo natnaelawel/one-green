@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/welcome_screen.dart';
 import 'package:flutter_firestore_example/routes.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:flutter_firestore_example/utils/my_theme.dart';
@@ -38,7 +39,10 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: Provider.of<MyTheme>(context).currentTheme(),
-            initialRoute: "/",
+            initialRoute: "/welcome",
+            routes: {
+              "/welcome": (BuildContext context) => OnboardingScreen(),
+            },
             onGenerateRoute: PageRouter.generateRoute);
       },
     );
