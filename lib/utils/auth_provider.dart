@@ -51,7 +51,7 @@ class UserRepository with ChangeNotifier {
     if (user != null) {
       this._authenticatedUser = user;
       this._status = Status.Authenticated;
-      // notifyListeners();
+      notifyListeners();
     }
   }
 
@@ -69,6 +69,7 @@ class UserRepository with ChangeNotifier {
             role: data["role"],
             comments: [],
             profile: {});
+
         return result;
       } catch (error) {
         print("the error is $error");
