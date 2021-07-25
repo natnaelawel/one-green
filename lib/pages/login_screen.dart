@@ -207,7 +207,7 @@ class _LoginPage extends State<LoginPage> {
         ),
         border: InputBorder.none,
         filled: true,
-        fillColor: Theme.of(context).cardTheme.color,
+        fillColor: Color(0xfff3f3f4),
       ),
       cursorColor: Colors.black12,
     );
@@ -228,7 +228,7 @@ class _LoginPage extends State<LoginPage> {
         labelStyle: Theme.of(context).textTheme.bodyText1,
         border: InputBorder.none,
         filled: true,
-        fillColor: Theme.of(context).cardTheme.color,
+        fillColor: Color(0xfff3f3f4),
 
         // fillColor: Color(0xfff3f3f4),
         prefixIcon: Icon(

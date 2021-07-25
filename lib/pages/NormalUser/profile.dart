@@ -189,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               BoxShadow(color: Colors.green, spreadRadius: 3),
                             ],
                           ),
-                          height: 20,
+                          height: 25,
                         ),
                         SizedBox(
                           width: 20.0,
@@ -208,7 +208,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               BoxShadow(color: Colors.green, spreadRadius: 3),
                             ],
                           ),
-                          height: 20,
+                          height: 25,
                         ),
                         SizedBox(
                           width: 20.0,
@@ -227,7 +227,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               BoxShadow(color: Colors.green, spreadRadius: 3),
                             ],
                           ),
-                          height: 20,
+                          height: 25,
                         ),
                       ],
                     ),
@@ -242,7 +242,7 @@ class _ProfilePageState extends State<ProfilePage> {
         onPressed: () {
           Navigator.pushNamed(context, "/editProfile");
         },
-        child: Icon(Icons.edit),
+        child: Icon(Icons.edit, color: Colors.white,),
       ),
     );
   }

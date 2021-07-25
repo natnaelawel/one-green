@@ -41,11 +41,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     Address(index: 5, name: "Bole Lemi"),
   ];
 
-  int selectedRadio = 1;
+  int _selectedRadio = -1;
+  int id = -1;
 
   setSelectedRadio(int val) {
     setState(() {
-      selectedRadio = val;
+      // selectedRadio = val;
     });
   }
 
@@ -299,11 +300,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
       height: 100,
       initialValue: [""],
       title: Text("Available Days"),
-      headerColor: Colors.blue.withOpacity(0.2),
+      headerColor: Theme.of(context).colorScheme.secondary,
       decoration: BoxDecoration(
         border: Border.all(width: 1.8),
       ),
-      selectedChipColor: Colors.blue.shade300,
+      selectedChipColor: Theme.of(context).colorScheme.onPrimary,
       selectedTextStyle: TextStyle(color: Colors.white),
       onTap: (values) {
         //_selectedAnimals4 = values;
@@ -316,7 +317,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildAddressField(BuildContext context) {
     return ListTile(
-      title: Text('Select Address'),
+      title: Text(
+        address == '' ? 'Select Address' : address,
+      ),
       onTap: () {
         _showSingleChoiceDialog(context);
       },
@@ -328,7 +331,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
         builder: (context) {
           // final _singleNotifier = Provider.of<SingleNotifier>(context);
           return AlertDialog(
-            title: Text('Select Address'),
+            title: Text(
+              'Select Address',
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: _places
@@ -336,10 +341,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     (place) => RadioListTile(
                       title: Text("${place.name}"),
                       value: place.index,
-                      groupValue: selectedRadio,
+                      groupValue: id,
                       onChanged: (val) {
-                        address = place.name;
-                        setSelectedRadio(val as int);
+                        // address = place.name;
+                        // setSelectedRadio(val as int);
+                        setState(() {
+                          address = place.name;
+                          id = place.index;
+                          _selectedRadio = val as int;
+                        });
                       },
                     ),
                   )
@@ -375,11 +385,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildGetLocation() {
     return ListTile(
-      title: Text('Choose Location'),
+      title: Text('Tap here to insert Location'),
       trailing: IconButton(
-        color: Colors.blue,
+        color: Theme.of(context).colorScheme.secondary,
         // iconSize: 30,
-        icon: Icon(locationSelected ? Icons.check : Icons.pin_drop_outlined),
+        icon: Icon(locationSelected ? Icons.check : Icons.pin_drop),
         onPressed: () => getLocation(),
       ),
       onTap: () => getLocation(),
