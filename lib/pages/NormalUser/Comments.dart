@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class Comments extends StatefulWidget {
   @override
   _CommentsState createState() => _CommentsState();
@@ -11,12 +12,16 @@ class _CommentsState extends State<Comments> {
       body: SafeArea(
         child: Container(
           color: Colors.white,
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
-              child: _comments_cards(),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(15),
+                child: Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(30.0)),
+                  child: _comments_cards(),
+                ),
+              ),
             ),
           ),
         ),
@@ -36,6 +41,24 @@ const comments_list = [
     "comment":
         'The bottom navigation bar consists of multiple items in the form of text labels, icons, or both, laid out on top of a piece of material. It provides quick navigation between the top-level views of an app. For larger screens, side navigation may be a better fit.',
     "date": "17/12/2021",
+    "status": "not-read"
+  },
+  {
+    "comment":
+        'The bottom navigation bar consists of multiple items in the form of text labels, icons, or both, laid out on top of a piece of material. It provides quick navigation between the top-level views of an app. For larger screens, side navigation may be a better fit.',
+    "date": "12/12/2021",
+    "status": "not-read"
+  },
+  {
+    "comment":
+        'The bottom navigation bar consists of multiple items in the form of text labels, icons, or both, laid out on top of a piece of material. It provides quick navigation between the top-level views of an app. For larger screens, side navigation may be a better fit.',
+    "date": "12/12/2021",
+    "status": "not-read"
+  },
+  {
+    "comment":
+        'The bottom navigation bar consists of multiple items in the form of text labels, icons, or both, laid out on top of a piece of material. It provides quick navigation between the top-level views of an app. For larger screens, side navigation may be a better fit.',
+    "date": "12/12/2021",
     "status": "not-read"
   },
   {

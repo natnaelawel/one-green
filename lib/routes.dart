@@ -119,17 +119,17 @@ class PageRouter {
           return MaterialPageRoute(builder: (context) {
             // final userStatus = Provider.of<UserRepository>(context).status;
             // switch (userStatus) {
-              // case Status.Unauthenticated:
-                // {
-                  return LoginPage();
-                // }
+            // case Status.Unauthenticated:
+            // {
+            return LoginPage();
+            // }
 
-              // case Status.Authenticated:
-              // return HomePage(title: "HomePage");
-              // case Status.Authenticating:
-                // return Center(
-                  // child: CircularProgressIndicator(),
-                // );
+            // case Status.Authenticated:
+            // return HomePage(title: "HomePage");
+            // case Status.Authenticating:
+            // return Center(
+            // child: CircularProgressIndicator(),
+            // );
             // }
           });
         }

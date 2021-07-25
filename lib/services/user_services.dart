@@ -91,6 +91,6 @@ class UserServices {
   }
 
   Future<void> getCollectors() async {
-    await userservice.where("role", isEqualTo: "COLLECTORS_USER").get();
+    await userservice.where("role", isEqualTo: "COLLECTOR_USER").get();
   }
 }

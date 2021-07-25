@@ -8,11 +8,10 @@ class RecycleTips extends StatefulWidget {
 }
 
 List<String> images = [
-  'https://gank.io/images/5ba77f3415b44f6c843af5e149443f94',
-  'https://gank.io/images/02eb8ca3297f4931ab64b7ebd7b5b89c',
-  'https://gank.io/images/31f92f7845f34f05bc10779a468c3c13',
-  'https://gank.io/images/b0f73f9527694f44b523ff059d8a8841',
-  'https://gank.io/images/1af9d69bc60242d7aa2e53125a4586ad',
+  'assets/images/ksjl9pw181217.jpg',
+  'assets/images/fvdou6zj181217.jpg',
+  'assets/images/wavylst02single01.jpg',
+  'assets/images/x5ft0ije181217.jpg',
 ];
 
 class _RecycleTipsState extends State<RecycleTips> {
@@ -20,6 +19,7 @@ class _RecycleTipsState extends State<RecycleTips> {
     images.length,
     (int index) {
       return Card(
+        color: Colors.white,
         elevation: 1,
         child: Column(
           children: [
@@ -28,7 +28,7 @@ class _RecycleTipsState extends State<RecycleTips> {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(50.0),
                   // boxShadow: [
                   //   BoxShadow(
                   //     offset: Offset(0, 17),
@@ -40,11 +40,11 @@ class _RecycleTipsState extends State<RecycleTips> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16.0),
-                  child: Image.network(
+                  child: Image.asset(
                     images[index],
-                    fit: BoxFit.fitWidth,
-                    height: 800,
-                    filterQuality: FilterQuality.low,
+                    // fit: BoxFit.fitWidth,
+                    // height: 800,
+                    // filterQuality: FilterQuality.low,
                   ),
                 ),
               ),
@@ -52,9 +52,13 @@ class _RecycleTipsState extends State<RecycleTips> {
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 8, 8, 15),
               child: ListTile(
+                tileColor: Colors.deepPurpleAccent,
                 title: Text(
                   'Put everything away after use.',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white),
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -64,7 +68,7 @@ class _RecycleTipsState extends State<RecycleTips> {
                     'As you move from one room to another, do a quick scan to see '
                     'if there’s anything that you can take with you. Go out of your way '
                     'to make sure that anything you wear, use or move ends up where it belongs. It’s easy to leave a pair of s',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ),
