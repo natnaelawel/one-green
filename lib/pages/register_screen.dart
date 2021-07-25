@@ -20,7 +20,6 @@ class _SignUpPage extends State<SignUpPage> {
   String _name = "";
   String _phone = "";
   String _password = "";
-  bool _isLoading = false;
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -318,7 +317,6 @@ class _SignUpPage extends State<SignUpPage> {
       try {
         await _userServices.addUser(user.toJson());
         setState(() {
-          _isLoading = true;
         });
         // final user = await widget.auth.SignIn(_phone, _password);
         DialogBox().information(
@@ -326,7 +324,6 @@ class _SignUpPage extends State<SignUpPage> {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
         setState(() {
-          _isLoading = false;
         });
       } catch (err) {
         print('error');

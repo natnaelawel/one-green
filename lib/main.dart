@@ -2,11 +2,6 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore_example/pages/collectors/map.dart';
-import 'package:flutter_firestore_example/pages/login_screen.dart';
-import 'package:flutter_firestore_example/pages/NormalUser/edit_profile_page.dart';
-import 'package:flutter_firestore_example/pages/NormalUser/profile.dart';
-import 'package:flutter_firestore_example/pages/register_screen.dart';
 import 'package:flutter_firestore_example/routes.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:flutter_firestore_example/utils/my_theme.dart';
@@ -18,24 +13,34 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
-      create: (context) => UserRepository(),
+      create: (context) => MyTheme(),
     ),
     ChangeNotifierProvider(
-      create: (context) => MyTheme(),
+      create: (context) => UserRepository(),
     ),
   ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+
+  // }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'One Green',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: Provider.of<MyTheme>(context).currentTheme(),
-        initialRoute: "/",
-        onGenerateRoute: PageRouter.generateRoute);
+    return FutureBuilder(
+      future: Provider.of<UserRepository>(context).getUserFromStorage(),
+      builder: (context, snapshot) {
+        return MaterialApp(
+            title: 'One Green',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: Provider.of<MyTheme>(context).currentTheme(),
+            initialRoute: "/",
+            onGenerateRoute: PageRouter.generateRoute);
+      },
+    );
   }
 }

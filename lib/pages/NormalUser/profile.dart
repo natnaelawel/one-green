@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
+import 'package:flutter_firestore_example/pages/login_screen.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = "/userProfile";
@@ -34,8 +37,16 @@ class _ProfilePageState extends State<ProfilePage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(CupertinoIcons.moon_stars),
-            onPressed: () {},
+            icon: Icon(
+              CupertinoIcons.moon_stars,
+              color: Colors.deepOrange,
+              size: 30.0,
+            ),
+            onPressed: () {
+              Provider.of<UserRepository>(context, listen: false).signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  LoginPage.routeName, (route) => false);
+            },
           ),
         ],
       ),

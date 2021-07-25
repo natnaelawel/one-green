@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
-import 'package:flutter_firestore_example/widgets/dialog.dart';
 import 'package:provider/provider.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -291,21 +290,16 @@ class _LoginPage extends State<LoginPage> {
       print("validated $_phone $_password");
       form.save();
       try {
-        var matched = await Provider.of<UserRepository>(context, listen: false)
+        Provider.of<UserRepository>(context, listen: false)
             .signIn(_phone, _password);
-        print("matching");
-        print(matched);
         final isMatched =
             Provider.of<UserRepository>(context, listen: false).status ==
                 Status.Authenticated;
-        print(isMatched);
         if (isMatched) {
           Navigator.pushNamed(context, LoginPage.routeName);
         }
       } catch (err) {
         print('error');
-        DialogBox().information(
-            context, 'Login Error', 'Something went wrong please try again!:');
         print(err);
       }
     }
