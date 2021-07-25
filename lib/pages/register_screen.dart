@@ -311,7 +311,7 @@ class _SignUpPage extends State<SignUpPage> {
           phone: _phone,
           password: _password,
           comments: [],
-          role: selectedRadio == 0 ? "NORMAL_USER" : "COLLECTORS_USER",
+          role: selectedRadio == 0 ? "NORMAL_USER" : "COLLECTOR_USER",
           profile: {});
 
       try {

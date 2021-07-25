@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
+import 'package:flutter_firestore_example/services/user_services.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -15,18 +16,24 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  UserServices _userServices = new UserServices();
+
   @override
   Widget build(BuildContext context) {
+    User user1 =
+        Provider.of<UserRepository>(context, listen: false).authenticatedUser!;
+    // User user1 = context.read<UserRepository>().authenticatedUser;
     final user = new User(
-        uid: "890707",
-        name: "Nathaniel Awel",
-        phone: "+0923343443",
-        password: "password",
+        uid: user1.uid,
+        name: user1.name,
+        phone: user1.phone,
+        password: user1.password,
+        // profile: {},
         profile: {
-          "houseNo": "314",
-          "address": "Hawassa, Ethiopia",
-          "latLng": new LatLng(9.001392211274675, 38.78237001138305),
-          "rating": 4.5,
+          "houseNo": "",
+          "address": "",
+          "latLng": null,
+          "rating": 0,
         },
         comments: [],
         role: "role");
