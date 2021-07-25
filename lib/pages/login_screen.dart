@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:provider/provider.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'register_screen.dart';
-
 
 class LoginPage extends StatefulWidget {
   // final VoidCallback onSignedIn;
@@ -291,27 +292,15 @@ class _LoginPage extends State<LoginPage> {
       form.save();
 
       try {
-        // setState(() {
-        //   _isLoading = true;
-        // });
         if (true) {
-          // DialogBox().information(
-          // context, 'Login Success', 'You have Successfuly Logged in');
-          // Navigator.replace(
-          //  MaterialPageRoute(builder: (context) => MainScreen()));
-
-          Future.delayed(Duration(seconds: 2)).then((value) {
+          final isMatch = await Provider.of<UserRepository>(context, listen: false)
+              .signIn(_phone, _password);
+          if (isMatch) {
+             Future.delayed(Duration(seconds: 2)).then((value) {
             Navigator.pushNamedAndRemoveUntil(
-                context, "/profile", (Route<dynamic> route) => false);
-
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => IndexPage()),
-            //     (route) => false);
-            setState(() {
-              // _isLoading = false;
-            });
+                context, "/", (Route<dynamic> route) => false);
           });
+          }
         }
       } catch (err) {
         print('error');
