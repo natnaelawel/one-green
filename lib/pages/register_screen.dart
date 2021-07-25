@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/widgets/dialog.dart';
 
 import 'login_screen.dart';
 
@@ -248,7 +249,7 @@ class _SignUpPage extends State<SignUpPage> {
   void handleSubmit() async {
     final form = _formKey.currentState;
     if (form!.validate()) {
-      print('validated');
+      // print(_phone,_password);
       form.save();
 
       try {
@@ -264,8 +265,8 @@ class _SignUpPage extends State<SignUpPage> {
         //     _isLoading = false;
         //   });
         // }
-        // DialogBox().information(
-        //     context, 'SignUp Success', 'You have Successfuly Logged in');
+        DialogBox().information(
+            context, 'SignUp Success', 'You have Successfuly Logged in');
       } catch (err) {
         print('error');
         print(err);
