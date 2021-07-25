@@ -15,7 +15,7 @@ class _CompanyPageState extends State<CompanyPage> {
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _recycleType = TextEditingController();
   final TextEditingController _pricePerTonController = TextEditingController();
-  final companyRepository = CompanyServices.collectorservice;
+  final companyRepository = CompanyServices.companyService;
 
   @override
   Widget build(BuildContext context) {

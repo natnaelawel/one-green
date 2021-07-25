@@ -20,7 +20,6 @@ class _SignUpPage extends State<SignUpPage> {
   String _name = "";
   String _phone = "";
   String _password = "";
-  bool _isLoading = false;
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
@@ -175,6 +174,7 @@ class _SignUpPage extends State<SignUpPage> {
       decoration: InputDecoration(
         labelText: 'Phone',
         floatingLabelBehavior: FloatingLabelBehavior.auto,
+        labelStyle: Theme.of(context).textTheme.bodyText1,
         // alignLabelWithHint: true,
         prefixIcon: Icon(Icons.phone),
         // hintText: 'Enter your email',
@@ -182,6 +182,7 @@ class _SignUpPage extends State<SignUpPage> {
         filled: true,
         fillColor: Color(0xfff3f3f4),
       ),
+      cursorColor: Colors.black12,
     );
   }
 
@@ -196,14 +197,13 @@ class _SignUpPage extends State<SignUpPage> {
       decoration: InputDecoration(
         labelText: 'Name',
         focusColor: Color(0xff4064f3),
-        labelStyle: TextStyle(
-          color: Color(0xff4064f3),
-        ),
+        labelStyle: Theme.of(context).textTheme.bodyText1,
         border: InputBorder.none,
         filled: true,
         fillColor: Color(0xfff3f3f4),
         prefixIcon: Icon(Icons.person),
       ),
+      cursorColor: Colors.black12,
     );
   }
 
@@ -219,9 +219,7 @@ class _SignUpPage extends State<SignUpPage> {
       decoration: InputDecoration(
         labelText: 'Password',
         focusColor: Color(0xff4064f3),
-        labelStyle: TextStyle(
-          color: Color(0xff4064f3),
-        ),
+        labelStyle: Theme.of(context).textTheme.bodyText1,
         border: InputBorder.none,
         filled: true,
         fillColor: Color(0xfff3f3f4),
@@ -235,6 +233,7 @@ class _SignUpPage extends State<SignUpPage> {
           },
         ),
       ),
+      cursorColor: Colors.black12,
     );
   }
 
@@ -304,28 +303,26 @@ class _SignUpPage extends State<SignUpPage> {
       print(_phone + _password);
       form.save();
 
+      print(selectedRadio);
+
       var user = User(
           uid: 'uid',
           name: _name,
           phone: _phone,
           password: _password,
           comments: [],
-          role: selectedRadio == 0 ? "NORMAL_USER" : "COLLECTOR_USER",
+          role: selectedRadio == 0 ? "NORMAL_USER" : "COLLECTORS_USER",
           profile: {});
 
       try {
         await _userServices.addUser(user.toJson());
-        setState(() {
-          _isLoading = true;
-        });
+        setState(() {});
         // final user = await widget.auth.SignIn(_phone, _password);
         DialogBox().information(
             context, 'SignUp Success', 'You have Successfully Registered!');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
-        setState(() {
-          _isLoading = false;
-        });
+        setState(() {});
       } catch (err) {
         print('error');
         print(err);

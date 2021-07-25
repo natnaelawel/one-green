@@ -41,6 +41,7 @@ class UserRepository with ChangeNotifier {
   Future signOut() async {
     clearStorage();
     _status = Status.Unauthenticated;
+    _authenticatedUser = null;
     notifyListeners();
     return Future.delayed(Duration.zero);
   }
@@ -50,54 +51,32 @@ class UserRepository with ChangeNotifier {
     if (user != null) {
       this._authenticatedUser = user;
       this._status = Status.Authenticated;
-      print("hello world");
+      notifyListeners();
     }
-    print("json data ${jsonEncode(user)}");
   }
 
   Future<User?> getUserDataFromStorage() async {
     final storage = new FlutterSecureStorage();
     var userData = await storage.read(key: "logged_in_user");
     if (userData != null) {
-      var data = jsonDecode(userData) as Map<String, dynamic>;
-      // try {
-      //   final result = User(
-      //       uid: "",
-      //       name: data["name"],
-      //       password: data["password"],
-      //       phone: data["phone"],
-      //       role: data["role"],
-      //       comments: data["comments"],
-      //       profile: data["profile"]);
-      //   print("below the trycatch");
-      // } catch (error) {
-      //   print("the error is $error");
-      // }
-      // return result;
-      return User.fromJson(data, data["uid"]);
+      var data = jsonDecode(userData);
+      try {
+        final result = new User(
+            uid: data["uid"],
+            name: data["name"],
+            password: data["password"],
+            phone: data["phone"],
+            role: data["role"],
+            comments: [],
+            profile: {});
+
+        return result;
+      } catch (error) {
+        print("the error is $error");
+      }
     } else {
       return null;
     }
-  }
-
-  User? getUserFromJson(payload) {
-    var id = payload['uid'];
-    var name = payload['name'];
-    var phone = payload['phone'];
-    var password = payload['password'];
-    var comments = payload['comments'];
-    var profile = payload['profile'];
-    var role = payload['role'];
-    User result = User(
-        uid: id,
-        name: name,
-        password: password,
-        phone: phone,
-        role: role,
-        comments: comments,
-        profile: profile);
-    print("hello user from storagge ${result.toJson()}");
-    return result;
   }
 
   Future<void> clearStorage() async {
@@ -109,11 +88,15 @@ class UserRepository with ChangeNotifier {
 
   void storeUserToStorage(User user) async {
     final storage = new FlutterSecureStorage();
-    String encoded = json.encode(user);
-    print("encoded string $encoded");
-    print("encoded uid ${user.uid}");
-    await storage.write(key: 'logged_in_user', value: jsonEncode(user));
-
-    await getUserDataFromStorage();
+    var resBody = {};
+    resBody["uid"] = user.uid;
+    resBody["name"] = user.name;
+    resBody["role"] = user.role;
+    resBody["phone"] = user.phone;
+    resBody["password"] = user.password;
+    resBody["profile"] = user.profile;
+    resBody["comments"] = user.comments;
+    String str = json.encode(resBody);
+    await storage.write(key: 'logged_in_user', value: str);
   }
 }
