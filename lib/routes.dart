@@ -17,7 +17,6 @@ class PageRouter {
     switch (settings.name) {
       case "/":
         {
-
           return MaterialPageRoute(builder: (context) {
             Provider.of<UserRepository>(context).getUserFromStorage();
             final user = Provider.of<UserRepository>(context).authenticatedUser;
@@ -39,6 +38,7 @@ class PageRouter {
                       }
                     case "COLLECTOR_USER":
                       {
+                        print('Normal User logged');
                         return CollectorIndexPage();
                       }
                     case "ADMIN_USER":

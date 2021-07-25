@@ -2,16 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_firestore_example/model/user.dart';
 
 class UserServices {
-  static final CollectionReference userservice = FirebaseFirestore.instance.collection('users');
+  static final CollectionReference userservice =
+      FirebaseFirestore.instance.collection('users');
   // .withConverter<User>(
   // fromFirestore: (snapshot, _) =>
   // User.fromJson(snapshot.data()!, snapshot.reference.id),
   // toFirestore: (user, _) => user.toJson(),
   // );
   Future<User?> signIn(String phone, String password) async {
-    var data = await userservice.where("phone", isEqualTo: phone).get().then((value) => value.docs.first);
+    var data = await userservice
+        .where("phone", isEqualTo: phone)
+        .get()
+        .then((value) => value.docs.first);
     var user_data = data.data() as Map<String, Object>;
-    if(user_data['password'].toString() == password){
+    print(user_data);
+    if (user_data['password'].toString() == password) {
       return new User(
           uid: data.reference.id,
           name: user_data['name'].toString(),
@@ -38,8 +43,12 @@ class UserServices {
   }
 
   Future<List<Map<String, Object?>>> getNormalUsers() async {
-    final data = await userservice.where("role", isEqualTo: "NORMAL_USER").get().then((value) => value.docs);
-    final result = data.map((value) => value.data() as Map<String, dynamic>).toList();
+    final data = await userservice
+        .where("role", isEqualTo: "NORMAL_USER")
+        .get()
+        .then((value) => value.docs);
+    final result =
+        data.map((value) => value.data() as Map<String, dynamic>).toList();
     return result;
   }
 
@@ -48,6 +57,6 @@ class UserServices {
   }
 
   Future<void> getCollectors() async {
-    await userservice.where("role", isEqualTo: "COLLECTORS").get();
+    await userservice.where("role", isEqualTo: "COLLECTOR_USER").get();
   }
 }
