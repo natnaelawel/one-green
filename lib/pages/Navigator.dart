@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
-import 'Comments.dart';
-import 'Hacks..dart';
-import 'Tips.dart';
-import 'map.dart';
+import 'NormalUser/Comments.dart';
+import 'NormalUser/Hacks.dart';
+import 'NormalUser/Tips.dart';
+import 'collectors/map.dart';
 
 class UserNavigator extends StatefulWidget {
   @override

@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firestore_example/pages/home.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
-import 'package:flutter_firestore_example/pages/map.dart';
-import 'package:flutter_firestore_example/pages/profile.dart';
+import 'package:flutter_firestore_example/pages/collectors/map.dart';
+import 'package:flutter_firestore_example/pages/collectors/profile.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:flutter_firestore_example/pages/profile/edit_profile_page.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
@@ -26,7 +26,7 @@ class PageRouter {
               case Status.Uninitialized:
                 break;
               case Status.Authenticated:
-                return HomePage(title: "HomePage");
+                // return HomePage(title: "HomePage");
               case Status.Authenticating:
                 return Center(
                   child: CircularProgressIndicator(),
@@ -131,7 +131,7 @@ class PageRouter {
               case Status.Uninitialized:
                 break;
               case Status.Authenticated:
-                return HomePage(title: "HomePage");
+                // return HomePage(title: "HomePage");
               case Status.Authenticating:
                 return Center(
                   child: CircularProgressIndicator(),

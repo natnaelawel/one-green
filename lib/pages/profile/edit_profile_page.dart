@@ -5,7 +5,6 @@ import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 

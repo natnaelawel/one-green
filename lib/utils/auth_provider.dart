@@ -15,6 +15,7 @@ class UserRepository with ChangeNotifier {
       _status = Status.Authenticating;
       notifyListeners();
       
+
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;

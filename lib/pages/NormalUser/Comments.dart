@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firestore_example/pages/Hacks..dart';
-import 'package:flutter_firestore_example/pages/Tips.dart';
-import 'package:flutter_firestore_example/pages/map.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/Hacks.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/Tips.dart';
+import 'package:flutter_firestore_example/pages/collectors/map.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 
