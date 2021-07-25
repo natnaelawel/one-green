@@ -304,13 +304,15 @@ class _SignUpPage extends State<SignUpPage> {
       print(_phone + _password);
       form.save();
 
+      print(selectedRadio);
+
       var user = User(
           uid: 'uid',
           name: _name,
           phone: _phone,
           password: _password,
           comments: [],
-          role: "",
+          role: selectedRadio == 0 ? "NORMAL_USER" : "COLLECTOR_USER",
           profile: {});
 
       try {
