@@ -3,9 +3,9 @@ import 'package:flutter_firestore_example/pages/Hacks..dart';
 import 'package:flutter_firestore_example/pages/Tips.dart';
 import 'package:flutter_firestore_example/pages/map.dart';
 import 'package:flutter_firestore_example/pages/profile/profile.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 
-FirebaseMessaging messaging = FirebaseMessaging.instance;
+// FirebaseMessaging messaging = FirebaseMessaging.instance;
 
 
 

@@ -33,7 +33,7 @@ class DialogBox {
             ),
           ),
           actions: [
-            FlatButton(onPressed: ()=>Navigator.pop(context), child: Text('OK')),
+            MaterialButton(onPressed: ()=>Navigator.pop(context), child: Text('OK')),
           ],
         );
       },

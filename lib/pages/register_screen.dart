@@ -251,6 +251,7 @@ class _SignUpPage extends State<SignUpPage> {
     if (form!.validate()) {
       // print(_phone,_password);
       form.save();
+      var user = User.
 
       try {
         setState(() {
