@@ -33,6 +33,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   final Map<String, dynamic> _user = {};
 
+  List<String> _places = [
+    "Bole",
+    "Addis Ketema",
+    "Gulele",
+    "Arada",
+    "Bole Lemi",
+  ];
+
+  int selectedRadio = -1;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -76,7 +86,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                _buildDomainChoice(),
+                _buildAddressField(context),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -293,54 +303,65 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget _buildDomainChoice() {
-    List<String> _places = [
-      "Bole",
-      "Addis Ketema",
-      "Gulele",
-      "Arada",
-      "Bole Lemi",
-      "Bole",
-      "Addis Ketema",
-      "Gulele",
-      "Arada",
-      "Bole Lemi",
-      "Bole",
-      "Addis Ketema",
-      "Gulele",
-      "Arada",
-      "Bole Lemi",
-    ];
-    final _items =
-        _places.map((place) => MultiSelectItem<String>(place, place)).toList();
-    return MultiSelectDialogField(
-      items: _items,
-      chipDisplay: MultiSelectChipDisplay(),
-      height: MediaQuery.of(context).size.height * 0.5,
-      searchable: true,
-      title: Text("Address"),
-      selectedColor: Colors.blue,
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.01),
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        border: Border.all(
-          // color: Colors.blue,
-          width: 1,
-        ),
-      ),
-      // buttonIcon: Icon(
-      //   Icons.place,
-      //   color: Colors.blue,
-      // ),
-      buttonText: Text(
-        "Address",
-        style: TextStyle(height: 2.0),
-      ),
-      onConfirm: (results) {
-        //_selectedAnimals = results;
+  Widget _buildAddressField(BuildContext context) {
+    return ListTile(
+      title: Text('Select your Address'),
+      onTap: () {
+        _showSingleChoiceDialog(context);
       },
     );
   }
+
+  _showSingleChoiceDialog(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) {
+          // final _singleNotifier = Provider.of<SingleNotifier>(context);
+          return AlertDialog(
+            title: Text('Select Address'),
+            content: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _places
+                      .map(
+                        (e) => RadioListTile(
+                          title: Text(e),
+                          value: e,
+                          groupValue: selectedRadio,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedRadio = value as int;
+                            });
+                          },
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  )),
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'OK'),
+                child: const Text(
+                  'OK',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      );
 
   Widget _buildGetLocation() {
     return ListTile(
