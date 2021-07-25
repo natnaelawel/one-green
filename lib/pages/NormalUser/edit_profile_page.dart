@@ -412,7 +412,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   _handleSubmit() {
     final user = new User(
-      uid: this._user['uid'],
+      uid: 'uid',
       name: this._user['fullName'],
       phone: this._user['phone'],
       password: this._user['password'],

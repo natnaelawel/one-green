@@ -206,11 +206,11 @@ class _LoginPage extends State<LoginPage> {
           Icons.alternate_email,
           color: Theme.of(context).iconTheme.color,
         ),
-        // hintText: 'Enter your email',
         border: InputBorder.none,
         filled: true,
         fillColor: Theme.of(context).cardTheme.color,
       ),
+      cursorColor: Colors.black12,
     );
   }
 
@@ -226,9 +226,7 @@ class _LoginPage extends State<LoginPage> {
       decoration: InputDecoration(
         labelText: 'Password',
         focusColor: Color(0xff4064f3),
-        labelStyle: TextStyle(
-          color: Color(0xff4064f3),
-        ),
+        labelStyle: Theme.of(context).textTheme.bodyText1,
         border: InputBorder.none,
         filled: true,
         fillColor: Theme.of(context).cardTheme.color,
@@ -248,6 +246,7 @@ class _LoginPage extends State<LoginPage> {
           },
         ),
       ),
+      cursorColor: Colors.black12,
     );
   }
 
