@@ -14,13 +14,13 @@ class AppTheme {
       ),
     ),
     colorScheme: ColorScheme.light(
-      primary: Colors.white,
-      onPrimary: Colors.white,
+      primary: Colors.green,
+      onPrimary: Colors.greenAccent,
       primaryVariant: Colors.white38,
-      secondary: Colors.red,
+      secondary: Colors.greenAccent,
     ),
     cardTheme: CardTheme(
-      color: Colors.white,
+      color: Colors.blue[400],
     ),
     iconTheme: IconThemeData(
       color: Colors.black54,

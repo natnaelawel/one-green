@@ -167,9 +167,68 @@ class _ProfilePageState extends State<ProfilePage> {
                         )
                       ],
                     ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Row(
                       children: [
-                        
+                        SizedBox(
+                          width: 30.0,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text(
+                            'Monday',
+                            textScaleFactor: 1,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: Colors.green, spreadRadius: 3),
+                            ],
+                          ),
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text(
+                            'Thursday',
+                            textScaleFactor: 1,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: Colors.green, spreadRadius: 3),
+                            ],
+                          ),
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text(
+                            'Sunday',
+                            textScaleFactor: 1,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(color: Colors.green, spreadRadius: 3),
+                            ],
+                          ),
+                          height: 20,
+                        ),
                       ],
                     ),
                   ],

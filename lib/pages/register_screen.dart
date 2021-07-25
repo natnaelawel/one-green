@@ -170,7 +170,7 @@ class _SignUpPage extends State<SignUpPage> {
   Widget _buildPhoneNumberField() {
     return TextFormField(
       onChanged: (value) => _phone = value,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         labelText: 'Phone',
         floatingLabelBehavior: FloatingLabelBehavior.auto,

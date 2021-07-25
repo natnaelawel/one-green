@@ -379,7 +379,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       trailing: IconButton(
         color: Colors.blue,
         // iconSize: 30,
-        icon: Icon(locationSelected ? Icons.check : Icons.pin_drop),
+        icon: Icon(locationSelected ? Icons.check : Icons.pin_drop_outlined),
         onPressed: () => getLocation(),
       ),
       onTap: () => getLocation(),
