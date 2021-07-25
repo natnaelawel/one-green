@@ -14,7 +14,7 @@ class UserServices {
     await userservice.doc(userId).delete();
   }
 
-  Future<void> addUser(User user) async {
+  Future<void> addUser(Map<String,dynamic> user) async {
     await userservice.add(user);
   }
 

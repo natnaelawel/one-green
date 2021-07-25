@@ -4,7 +4,7 @@ class User {
   final String name;
   final String phone;
   final String password;
-  final Object comments;
+  final List<Map<String, dynamic>> comments;
   final Map<String, dynamic>  profile;
   final String role;
 
@@ -25,7 +25,7 @@ class User {
           name: json['name']! as String,
           phone: json['phone']! as String,
           password: json['password']! as String,
-          comments: json['comments']!,
+          comments: json['comments']! as List<Map<String,dynamic>>,
           role: json['role']! as String,
           profile: json['profile'] as Map<String, dynamic>
 
