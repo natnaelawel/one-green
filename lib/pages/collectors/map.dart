@@ -7,6 +7,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
+import 'package:provider/provider.dart';
+
 const double CAMERA_ZOOM = 13;
 const double CAMERA_TILT = 0;
 const double CAMERA_BEARING = 30;
@@ -23,7 +25,7 @@ class MapPageState extends State<MapPage> {
   Set<Marker> _markers = {};
   late BitmapDescriptor markerIcon;
   double pinPillPosition = -100;
-  // late String _mapStyleDark;
+  late String _mapStyleDark;
   late String _mapStyleLight;
 
   PinInformation currentlySelectedPin = PinInformation(
@@ -37,9 +39,9 @@ class MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
-    // rootBundle.loadString('assets/styles/map_dark_style.txt').then((string) {
-    //   _mapStyleDark = string;
-    // });
+    rootBundle.loadString('assets/styles/map_dark_style.txt').then((string) {
+      _mapStyleDark = string;
+    });
     rootBundle.loadString('assets/styles/map_light_style.txt').then((string) {
       _mapStyleLight = string;
     });
@@ -136,7 +138,8 @@ class MapPageState extends State<MapPage> {
   }
 
   void onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle(_mapStyleLight);
+    // bool isDarkMode = Provider(create: create)
+    controller.setMapStyle( _mapStyleLight);
     _controller.complete(controller);
     setMapPins();
   }

@@ -53,7 +53,7 @@ class ProfileWidget extends StatelessWidget {
           all: 8,
           child: Icon(
             Icons.edit,
-            color: Colors.white,
+            color: Colors.black,
             size: 20,
           ),
         ),

@@ -10,7 +10,6 @@ class AdminIndexPage extends StatefulWidget {
   @override
   _AdminIndexPageState createState() => _AdminIndexPageState();
 }
-
 class _AdminIndexPageState extends State<AdminIndexPage> {
   late final UserServices userServices;
 

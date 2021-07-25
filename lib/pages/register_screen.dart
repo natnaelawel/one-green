@@ -17,13 +17,12 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPage extends State<SignUpPage> {
   UserServices _userServices = new UserServices();
   bool _showPassword = false;
-  String _name="";
+  String _name = "";
   String _phone = "";
   String _password = "";
-  String _confirmPassword = "";
   bool _isLoading = false;
-  final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
 
   @override
@@ -55,7 +54,7 @@ class _SignUpPage extends State<SignUpPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        _buildEmailTextField(),
+                        _buildPhoneNumberField(),
                         SizedBox(
                           height: 20,
                         ),
@@ -151,7 +150,7 @@ class _SignUpPage extends State<SignUpPage> {
     );
   }
 
-  Widget _buildEmailTextField() {
+  Widget _buildPhoneNumberField() {
     return TextFormField(
       onChanged: (value) => _phone = value,
       keyboardType: TextInputType.emailAddress,
@@ -245,8 +244,8 @@ class _SignUpPage extends State<SignUpPage> {
                   Color(0xff9607c1),
                 ])),
         child: Text('SignUp',
-                // style: TextStyle(fontSize: 20, color: Colors.white),
-                style: TextStyle(color: Colors.white, fontSize: 18.0)),
+            // style: TextStyle(fontSize: 20, color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: 18.0)),
       ),
     );
   }
@@ -254,10 +253,17 @@ class _SignUpPage extends State<SignUpPage> {
   void handleSubmit() async {
     final form = _formKey.currentState;
     if (form!.validate()) {
-      print(_phone+_password);
+      print(_phone + _password);
       form.save();
 
-      var user = User(uid: 'uid', name: _name, phone: _phone, password: _password, comments: [], role: "",profile:{} );
+      var user = User(
+          uid: 'uid',
+          name: _name,
+          phone: _phone,
+          password: _password,
+          comments: [],
+          role: "",
+          profile: {});
 
       try {
         await _userServices.addUser(user.toJson());
@@ -269,17 +275,13 @@ class _SignUpPage extends State<SignUpPage> {
             context, 'SignUp Success', 'You have Successfully Registered!');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
-        if (user != null) {
-          setState(() {
-            _isLoading = false;
-          });
-        }
-
+        setState(() {
+          _isLoading = false;
+        });
       } catch (err) {
         print('error');
         print(err);
       }
     }
   }
-
 }

@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_firestore_example/pages/login_screen.dart';
 import 'package:flutter_firestore_example/pages/collectors/map.dart';
 import 'package:flutter_firestore_example/utils/auth_provider.dart';
-import 'package:flutter_firestore_example/pages/profile/edit_profile_page.dart';
-import 'package:flutter_firestore_example/pages/profile/profile.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/edit_profile_page.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/profile.dart';
 import 'package:flutter_firestore_example/pages/register_screen.dart';
 import 'utils/auth_provider.dart';
 

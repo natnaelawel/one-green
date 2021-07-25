@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/Comments.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/Hacks.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/Tips.dart';
-import 'package:flutter_firestore_example/pages/admin/admin_home_page.dart';
-import 'package:flutter_firestore_example/pages/profile/profile.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/normal_user_home_page.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/profile.dart';
 import 'package:flutter_firestore_example/services/user_services.dart';
 
 class NormalUserIndexPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _NormalUserIndexPageState extends State<NormalUserIndexPage> {
     tips = RecycleTips();
     comments = Comments();
     profile = ProfilePage();
-    dashboard = AdminHomePage(title: "title");
+    dashboard = NormalUserHomePage(title: "title");
     pages = [dashboard, hacks, tips, comments, profile];
 
     currentPage = pages[0];

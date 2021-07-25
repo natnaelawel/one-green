@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_firestore_example/pages/profile/button_widget.dart';
-import 'package:flutter_firestore_example/pages/profile/profile_widget.dart';
+import 'package:flutter_firestore_example/model/user.dart';
+import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,28 +18,20 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final ImagePicker _picker = new ImagePicker();
 
-  Map<String, dynamic> _formData = <String, dynamic>{
-    'companyName': '???',
-    'city': "",
-    'street': "",
-    'addressLine': "",
-  };
-
   final _formKey = GlobalKey<FormState>();
-
-  String _firstName = '';
-  String _lastName = '';
-  String _email = '';
-  String _phone = '';
 
   late double latitude;
   late double longitude;
   bool locationSelected = false;
 
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _houseNumberController = TextEditingController();
+  // final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
+
+  // String _verticalGroupValue = "Bole";
+
+  final Map<String, dynamic> _user = {};
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -68,11 +60,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                _buildFirstNameField(),
-                SizedBox(
-                  height: 20.0,
-                ),
-                _buildLastNameField(),
+                _buildFullNameField(),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -113,7 +101,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Stack(
       children: <Widget>[
         ProfileWidget(
-          imagePath: "assets/images/avatar.jpeg",
+          imagePath:
+              'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80',
           onClicked: () async {},
         ),
         Positioned(
@@ -184,45 +173,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final pickedFile = await _picker.getImage(
       source: source,
     );
-    setState(() {
-    });
+    setState(() {});
     // print(_imageFile.path + ' profile page');
   }
 
-  Widget _buildFirstNameField() {
+  Widget _buildFullNameField() {
     return TextFormField(
-      controller: _firstNameController,
-      validator: (value) => value!.isEmpty ? 'First Name is required' : null,
-      onSaved: (value) => _firstName = value!,
+      controller: _nameController,
+      validator: (value) => value!.isEmpty ? 'Full Name is required' : null,
+      onSaved: (value) {
+        setState(() {
+          this._user['fullName'] = value;
+        });
+      },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         isCollapsed: true,
-        labelText: "First Name",
-        hintText: 'Bekele',
-        contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLastNameField() {
-    return TextFormField(
-      controller: _firstNameController,
-      validator: (value) => value!.isEmpty ? 'Last Name cannot be empty' : null,
-      onSaved: (value) => _firstName = value!,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        isCollapsed: true,
-        labelText: "Last Name",
-        hintText: 'Petros',
+        labelText: "Full Name",
+        labelStyle: TextStyle(color: Colors.black),
+        hintText: 'Bekele Petros',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -241,11 +210,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return TextFormField(
       controller: _phoneController,
       // validator: (value) => value.isEmpty ? 'Last Name cannot be empty' : null,
-      onSaved: (value) => _phone = value!,
+      onSaved: (value) {
+        setState(() {
+          this._user['phone'] = value;
+        });
+      },
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         isCollapsed: true,
-        labelText: "Tele Phone",
+        labelText: "Phone",
+        labelStyle: TextStyle(color: Colors.black),
         hintText: '0912345678',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         border: OutlineInputBorder(
@@ -263,14 +237,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildHouseNumberField() {
     return TextFormField(
-      controller: _firstNameController,
+      controller: _houseNumberController,
       validator: (value) =>
           value!.isEmpty ? 'House Number cannot be empty' : null,
-      onSaved: (value) => _firstName = value!,
+      onSaved: (value) {
+        setState(() {
+          this._user['houseNumber'] = value;
+        });
+      },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         isCollapsed: true,
         labelText: "House Number",
+        labelStyle: TextStyle(color: Colors.black),
         hintText: '2532',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         border: OutlineInputBorder(
@@ -400,8 +379,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget _buildSubmitButton() => ButtonWidget(
-        text: "Submit",
-        onClicked: () {},
+  Widget _buildSubmitButton() => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+          onPrimary: Colors.white,
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text('Submit'),
+        onPressed: _handleSubmit(),
       );
+
+  _handleSubmit() {
+    final user = new User(
+      uid: this._user['uid'],
+      name: this._user['fullName'],
+      phone: this._user['phone'],
+      password: this._user['password'],
+      comments: this._user['comments'],
+      role: this._user['role'],
+      profile: this._user['profile'],
+    );
+  }
 }
