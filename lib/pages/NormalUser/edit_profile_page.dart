@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_firestore_example/model/user.dart';
 import 'package:flutter_firestore_example/pages/NormalUser/profile_widget.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:provider/provider.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const routeName = "/editProfile";
@@ -54,6 +56,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    User u = Provider.of<UserRepository>(context).authenticatedUser!;
+    _user["uid"] = u.uid;
+    _user["name"] = u.name;
+    // _user["uid"] = u.uid;
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -105,7 +112,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                _buildSubmitButton(),
+                _buildSubmitButton(context),
               ],
             ),
           ),
@@ -207,7 +214,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         isCollapsed: true,
-        labelText: "Full Name",
+        labelText: _user["name"],
         labelStyle: TextStyle(color: Colors.black),
         hintText: 'Bekele Petros',
         contentPadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
@@ -260,7 +267,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           value!.isEmpty ? 'House Number cannot be empty' : null,
       onSaved: (value) {
         setState(() {
-          this._user['houseNumber'] = value;
+          this._user['houseNo'] = value;
         });
       },
       keyboardType: TextInputType.text,
@@ -305,11 +312,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       selectedChipColor: Colors.blue.shade300,
       selectedTextStyle: TextStyle(color: Colors.white),
+      onSaved: (values) {
+         setState(() {
+          this._user['availableDays'] = values;
+        });
+      },
       onTap: (values) {
         //_selectedAnimals4 = values;
-        setState(() {
-          this._user['availableDays'] = [values];
-        });
+        // setState(() {
+          // this._user['availableDays'] = [values];
+        // });
       },
     );
   }
@@ -414,31 +426,35 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget _buildSubmitButton() => ElevatedButton(
+  Widget _buildSubmitButton(context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
+          // shape: StadiumBorder(),
           onPrimary: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         ),
         child: Text('Submit'),
-        onPressed: _handleSubmit(),
+        onPressed: _handleSubmit(context),
       );
 
-  _handleSubmit() {
+  _handleSubmit(BuildContext context) {
     final user = new User(
-      uid: 'uid',
-      name: this._user['fullName'],
+      uid: this._user["uid"],
+      name: this._user['name'],
       phone: this._user['phone'],
       password: this._user['password'],
       comments: this._user['comments'],
       role: this._user['role'],
       profile: {
-        'houseNumber': this._user['houseNumber'],
+        'houseNo': this._user['houseNo'],
         'address': this._user['address'],
         'latitude': this._user['latitude'],
-        'longitude': this._user['longitude']
+        'longitude': this._user['longitude'],
+        'availableDays': this._user['availableDays']
       },
     );
+    print("clicked");
+
+    context.read<UserRepository>().updateProfile(user);
   }
 }
 

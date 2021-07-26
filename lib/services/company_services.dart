@@ -6,7 +6,7 @@ class CompanyServices {
       FirebaseFirestore.instance.collection('companies').withConverter<Company>(
             fromFirestore: (snapshot, _) =>
                 Company.fromJson(snapshot.data()!, snapshot.reference.id),
-            toFirestore: (product, _) => product.toJson(),
+            toFirestore: (company, _) => company.toJson(),
           );
   Future<dynamic> getComments(String userId) async {
     var data = await companyService.get().then((value) => value.docs);
@@ -17,8 +17,8 @@ class CompanyServices {
     await companyService.doc(collectorId).delete();
   }
 
-  Future<void> addCompany(Company collector) async {
-    await companyService.add(Company);
+  Future<void> addCompany(Company company) async {
+    await companyService.add(company);
   }
 
   Future<void> updateCompany(Company collector) async {

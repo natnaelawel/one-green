@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firestore_example/model/company.dart';
+import 'package:flutter_firestore_example/pages/login_screen.dart';
 import 'package:flutter_firestore_example/services/company_services.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class CompanyPage extends StatefulWidget {
   CompanyPage({Key? key, required this.title}) : super(key: key);
@@ -13,7 +17,7 @@ class CompanyPage extends StatefulWidget {
 
 class _CompanyPageState extends State<CompanyPage> {
   final TextEditingController _companyNameController = TextEditingController();
-  final TextEditingController _recycleType = TextEditingController();
+  final TextEditingController _recycleTypeController = TextEditingController();
   final TextEditingController _pricePerTonController = TextEditingController();
   final companyRepository = CompanyServices.companyService;
 
@@ -21,6 +25,25 @@ class _CompanyPageState extends State<CompanyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: widget.key,
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: Icon(
+              CupertinoIcons.moon_stars,
+              color: Colors.deepOrange,
+              size: 30.0,
+            ),
+            onPressed: () {
+              Provider.of<UserRepository>(context, listen: false).signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  LoginPage.routeName, (route) => false);
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: StreamBuilder(
           stream:
@@ -38,7 +61,7 @@ class _CompanyPageState extends State<CompanyPage> {
                     margin: EdgeInsets.all(10),
                     child: ListTile(
                       title: Text(company.name),
-                      onTap: () => null,
+                      onTap: null,
                       subtitle: Text(company.pricePerTon.toString()),
                       trailing: SizedBox(
                         width: 100,
@@ -46,7 +69,8 @@ class _CompanyPageState extends State<CompanyPage> {
                           children: [
                             IconButton(
                                 icon: Icon(Icons.edit),
-                                onPressed: () => _createOrUpdate(company)),
+                                onPressed: () =>
+                                    _createOrUpdate(context, company)),
                             IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () => _deleteCompany(company.uid)),
@@ -66,34 +90,37 @@ class _CompanyPageState extends State<CompanyPage> {
       ),
       // Add new product
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _createOrUpdate(null),
+        onPressed: () => _createOrUpdate(context, null),
         child: Icon(Icons.add),
       ),
     );
   }
 
-  Future<void> _createOrUpdate([Company? company]) async {
+  Future<void> _createOrUpdate(context, [Company? company]) async {
     String action = 'create';
     if (company != null) {
       action = 'update';
       _companyNameController.text = company.name;
-      _recycleType.text = company.type;
+      _recycleTypeController.text = company.type;
       _pricePerTonController.text = company.pricePerTon.toString();
     }
-
+    print("@${_companyNameController.text}");
     await showModalBottomSheet(
+        enableDrag: true,
         isScrollControlled: true,
         context: context,
-        builder: (BuildContext ctx) {
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
+        builder: (ctx) {
+          return Container(
+            padding: EdgeInsets.all(30.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextField(
                   controller: _companyNameController,
-                  decoration: InputDecoration(labelText: 'Name'),
+                  decoration: InputDecoration(labelText: 'Company Name'),
+                  autofocus: true,
+                  cursorColor: Colors.black,
                 ),
                 TextField(
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -105,26 +132,41 @@ class _CompanyPageState extends State<CompanyPage> {
                 SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  child: Text(action == 'create' ? 'Create' : 'Update'),
+                TextField(
+                  controller: _pricePerTonController,
+                  decoration: InputDecoration(
+                    labelText: 'Recycle Type',
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextButton(onPressed: () => {}, child: Text("hellow ")),
+                TextButton(
+                  child: Text(
+                    action == 'create' ? 'Create' : 'Update',
+                    style: TextStyle(color: Colors.black),
+                  ),
                   onPressed: () async {
                     final String? name = _companyNameController.text;
-                    final String? type = _recycleType.text;
+                    final String? type = _recycleTypeController.text;
                     final double? price =
-                        double.tryParse(_pricePerTonController.text);
+                        double.tryParse(_pricePerTonController.text)!
+                            .toDouble();
+
+                    print("name $name");
+                    print("type $type");
                     if (name != null && price != null) {
                       if (action == 'create') {
-                        // Persist a new product to Firestore
-                        await companyRepository
-                            .add({name: name, type: type, price: price});
+                        await companyRepository.add(
+                            {name: name, type: type, "pricePerTon": price});
                       }
                       if (action == 'update') {
-                        // Update the product
                         await companyRepository.doc(company!.uid).update(
-                            {"name": name, "type": type, "price": price});
+                            {"name": name, "type": type, "pricePerTon": price});
                       }
                       _companyNameController.text = '';
-                      _recycleType.text = '';
+                      _recycleTypeController.text = '';
                       _pricePerTonController.text = '';
                       Navigator.of(context).pop();
                     }

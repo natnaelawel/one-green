@@ -59,21 +59,28 @@ class UserServices {
     return profile;
   }
 
-  Future<void> updateProfile(User user, Profile profile) async {
-    var data = {};
-    data["user"] = jsonEncode(user);
-    var prof = {};
-    prof["profile"] = jsonEncode(profile);
-    data['user'] = prof["profile"];
-
-    await userservice.doc(user.uid).update(user.toJson());
+  Future<bool> updateProfile(User user) async {
+    try {
+      await userservice.doc(user.uid).update({
+        "name": user.name,
+        "phone": user.phone,
+        "password": user.password,
+        "role": user.role,
+        "comments": user.comments,
+        "profile": user.profile
+      });
+      return true;
+    } catch (e) {
+      print(e);
+    }
+    return false;
   }
 
   Future<void> addUser(Map<String, dynamic> user) async {
     await userservice.add(user);
   }
 
-  Future<void> updateUser(User user) async {
+  Future<dynamic> updateUser(User user) async {
     await userservice.doc(user.uid).update(user.toJson());
   }
 
@@ -84,6 +91,8 @@ class UserServices {
         .then((value) => value.docs);
     final result =
         data.map((value) => value.data() as Map<String, dynamic>).toList();
+    
+    print("As of Minasie's result $result");
     return result;
   }
 
@@ -92,6 +101,6 @@ class UserServices {
   }
 
   Future<void> getCollectors() async {
-    await userservice.where("role", isEqualTo: "COLLECTORS_USER").get();
+    await userservice.where("role", isEqualTo: "COLLECTOR_USER").get();
   }
 }

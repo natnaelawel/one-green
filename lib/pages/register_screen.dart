@@ -316,15 +316,13 @@ class _SignUpPage extends State<SignUpPage> {
 
       try {
         await _userServices.addUser(user.toJson());
-        setState(() {
-        });
+        setState(() {});
         // final user = await widget.auth.SignIn(_phone, _password);
         DialogBox().information(
             context, 'SignUp Success', 'You have Successfully Registered!');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
-        setState(() {
-        });
+        setState(() {});
       } catch (err) {
         print('error');
         print(err);

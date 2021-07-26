@@ -19,6 +19,7 @@ class UserRepository with ChangeNotifier {
       _status = Status.Authenticating;
       notifyListeners();
       UserServices _userService = new UserServices();
+      // _userService.
       final user = await _userService.signIn(phone, password);
       if (user != null) {
         _status = Status.Authenticated;
@@ -44,6 +45,13 @@ class UserRepository with ChangeNotifier {
     _authenticatedUser = null;
     notifyListeners();
     return Future.delayed(Duration.zero);
+  }
+
+  Future updateProfile(User user) async {
+    try {
+      UserServices _userService = new UserServices();
+      await _userService.updateProfile(user);
+    } catch (e) {}
   }
 
   Future getUserFromStorage() async {

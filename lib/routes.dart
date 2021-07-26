@@ -20,7 +20,7 @@ class PageRouter {
       case "/":
         {
           return MaterialPageRoute(builder: (context) {
-            // final user = Provider.of<UserRepository>(context).authenticatedUser;
+            final user = Provider.of<UserRepository>(context).authenticatedUser;
             final userStatus = Provider.of<UserRepository>(context).status;
 
             switch (userStatus) {
@@ -30,13 +30,14 @@ class PageRouter {
                 }
               case Status.Authenticated:
                 {
-                  switch ("NORMAL_USER") {
+                  switch (user!.role) {
                     case "NORMAL_USER":
                       {
                         return NormalUserIndexPage();
                       }
                     case "COLLECTOR_USER":
                       {
+                        print('Normal User logged');
                         return CollectorIndexPage();
                       }
                     case "ADMIN_USER":
@@ -68,6 +69,7 @@ class PageRouter {
 
               case Status.Authenticated:
                 return MapPage();
+
               case Status.Authenticating:
                 return Center(
                   child: CircularProgressIndicator(),
@@ -87,6 +89,7 @@ class PageRouter {
 
               case Status.Authenticated:
                 return ProfilePage();
+
               case Status.Authenticating:
                 return Center(
                   child: CircularProgressIndicator(),
@@ -116,20 +119,42 @@ class PageRouter {
       case LoginPage.routeName:
         {
           return MaterialPageRoute(builder: (context) {
-            // final userStatus = Provider.of<UserRepository>(context).status;
-            // switch (userStatus) {
-              // case Status.Unauthenticated:
-                // {
+            final userStatus = Provider.of<UserRepository>(context).status;
+            switch (userStatus) {
+              case Status.Unauthenticated:
+                {
                   return LoginPage();
-                // }
+                }
 
-              // case Status.Authenticated:
-              // return HomePage(title: "HomePage");
-              // case Status.Authenticating:
-                // return Center(
-                  // child: CircularProgressIndicator(),
-                // );
-            // }
+              case Status.Authenticated:
+                {
+                  switch (Provider.of<UserRepository>(context)
+                      .authenticatedUser!
+                      .role) {
+                    case "NORMAL_USER":
+                      {
+                        return NormalUserIndexPage();
+                      }
+                    case "COLLECTOR_USER":
+                      {
+                        print('Normal User logged');
+                        return CollectorIndexPage();
+                      }
+                    case "ADMIN_USER":
+                      {
+                        return AdminIndexPage();
+                      }
+                    default:
+                      {
+                        return LoginPage();
+                      }
+                  }
+                }
+              case Status.Authenticating:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+            }
           });
         }
       case SignUpPage.routeName:

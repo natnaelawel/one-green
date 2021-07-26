@@ -42,8 +42,10 @@ class _NormalUserIndexPageState extends State<NormalUserIndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).cardTheme.color,
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Theme.of(context).cardTheme.color,
         selectedIndex: _currentIndex,
         showElevation: true,
         itemCornerRadius: 24,

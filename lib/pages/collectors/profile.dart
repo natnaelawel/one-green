@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firestore_example/pages/login_screen.dart';
+import 'package:flutter_firestore_example/utils/auth_provider.dart';
+import 'package:flutter_firestore_example/utils/my_theme.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CollectorProfilePage extends StatefulWidget {
   static const routeName = "/collectorProfile";
@@ -32,6 +38,53 @@ class _CollectorProfilePageState extends State<CollectorProfilePage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          Consumer<MyTheme>(builder: (context, notifier, child) {
+            return IconButton(
+                icon: Icon(
+                  !notifier.isDarkMode
+                      ? CupertinoIcons.moon_stars
+                      : CupertinoIcons.sun_max_fill,
+                  color: Colors.deepOrange,
+                  size: 30.0,
+                ),
+                onPressed: () {
+                  notifier.toggleTheme();
+                });
+          }),
+          PopupMenuButton(
+            child: Icon(
+              Icons.more_vert,
+              color: Colors.deepOrange,
+              size: 30.0,
+            ),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Text("settings"),
+                value: 1,
+              ),
+              PopupMenuItem(
+                child: Text("Logout"),
+                value: 2,
+              ),
+            ],
+            onSelected: (val) {
+              switch (val) {
+                case 2:
+                  {
+                    Provider.of<UserRepository>(context, listen: false)
+                        .signOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        LoginPage.routeName, (route) => false);
+                  }
+              }
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
         child: Form(
@@ -245,5 +298,4 @@ class _CollectorProfilePageState extends State<CollectorProfilePage> {
       ),
     );
   }
-
 }

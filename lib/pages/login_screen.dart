@@ -290,16 +290,21 @@ class _LoginPage extends State<LoginPage> {
       print("validated $_phone $_password");
       form.save();
       try {
-        Provider.of<UserRepository>(context, listen: false)
-            .signIn(_phone, _password);
-        final isMatched =
-            Provider.of<UserRepository>(context, listen: false).status ==
-                Status.Authenticated;
-        if (isMatched) {
+          print("password match ${Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated}");
+        await Provider.of<UserRepository>(context, listen: false).signIn(_phone, _password);
+        Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated;
+        // if (isMatched) {
+          print("password match ${Provider.of<UserRepository>(context, listen: false).status == Status.Authenticated}");
           Navigator.pushNamed(context, LoginPage.routeName);
-        }
+        // }
+        print("there is an error");
+        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+            content: Text(
+          "There is an error when logggin",
+          style: TextStyle(color: Colors.red),
+        )));
       } catch (err) {
-        print('error');
+        print("error $err");
         print(err);
       }
     }

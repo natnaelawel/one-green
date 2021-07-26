@@ -15,13 +15,14 @@ class Company {
           uid: reference,
           name: json['name']! as String,
           type: json['type']! as String,
-          pricePerTon: (json['pricePerTon']! as num) as double,
+          pricePerTon: (json['pricePerTon']! as num).toDouble(),
         );
 
   Map<String, Object?> toJson() {
     return {
       'name': name,
       'pricePerTon': pricePerTon,
+      'type': type,
     };
   }
 }
